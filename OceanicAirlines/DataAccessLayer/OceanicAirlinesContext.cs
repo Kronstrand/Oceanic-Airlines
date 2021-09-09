@@ -1,6 +1,8 @@
 ﻿using OceanicAirlines.Models;
+using System;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Web;
 
 namespace OceanicAirlines.DataAccessLayer
 {
@@ -17,7 +19,6 @@ namespace OceanicAirlines.DataAccessLayer
         public DbSet<Dimensions> Dimensions { get; set; }
         public DbSet<Parcel> Parcels { get; set; }
         public DbSet<TransportationMethod> TransportationMethods { get; set; }
-        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -46,6 +47,14 @@ namespace OceanicAirlines.DataAccessLayer
                     .WithMany(m => m.DestinationCityParcel)
                     .HasForeignKey(m => m.DestinationID)
                     .WillCascadeOnDelete(false);
+        }
+
+        /// <summary>
+        /// Get the connection string getting SqlServerInstance and DbName from Session.
+        /// </summary>
+        public static string GetConnectionString()
+        {
+            return "Data Source=dbs-oa-dk1.database.windows.net;Initial Catalog=dbs-oa-dk1;User ID=admin-oa-dk1;Password=oceanicFlyAway16";
         }
     }
 }
