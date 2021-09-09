@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Newtonsoft.Json;
 using Oceanic_Airlines.DTO;
+using OceanicAirlines.Api;
 
 namespace Oceanic_Airlines.Api
 {
@@ -11,22 +12,19 @@ namespace Oceanic_Airlines.Api
     public class EastIndiaTradingCoApiController : ApiController
     {
 
-        static string _address = "http://wa-ei-dk1.azurewebsites.net/api/GetRouteDetails";
+        static string _address = "http://wa-eit-dk1.azurewebsites.net/api/EITCAPI/getConnection";
 
-        public async void Post(RouteSearchDTO search)
+        public IHttpActionResult Post(RouteSearchDTO search)
         {
-            var result = await GetExternalResponse(search);
+            //search = new RouteSearchDTO {Depth = 1.1f };
+            var result = GetExternalResponse(search);
+            return Json(result);
         }
 
-        private async Task<string> GetExternalResponse(RouteSearchDTO search)
+        public RouteDetailsDTO GetExternalResponse (RouteSearchDTO search)
         {
-            var client = new HttpClient();
-            var payload = JsonConvert.SerializeObject(search);
-            var content = new StringContent(payload, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync(_address, content);
-            response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadAsStringAsync();
-            return result;
+            var apiAcces = new AccesExternalApi();
+            return apiAcces.GetExternalResponse(_address, search); 
         }
     }
 }
