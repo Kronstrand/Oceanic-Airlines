@@ -23,7 +23,7 @@ namespace OceanicAirlines.Models
 
         public Guid TransportationMethodID { get; set; }
         public virtual TransportationMethod TransportationMethod { get; set; }
-        public TimeSpan Timespan { get; set; }
+        public TimeSpan? Timespan { get; set; }
         public bool Available { get; set; }
     }
 }
