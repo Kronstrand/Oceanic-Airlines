@@ -135,6 +135,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\AccesExternalApi.cs" />
     <Compile Include="Api\EastIndiaTradingCoApiController.cs" />
     <Compile Include="Api\OceanicAirlinesApiController.cs" />
     <Compile Include="Api\TelstarLogisticsApiController.cs" />
