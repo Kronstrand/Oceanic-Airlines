@@ -14,11 +14,14 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using Oceanic_Airlines.Business_Logic;
+using OceanicAirlines.DataAccessLayer;
 
 namespace Oceanic_Airlines.Business_Logic
 {
 	public class HandleRoutes : IHandleRoutes
 	{
+        private OceanicAirlinesContext db = new OceanicAirlinesContext();
+
 		List<Vertex> vertices;
 		IList<Edge> edges;
 		List<ResultPathDTO> finalResultPaths;
@@ -29,28 +32,33 @@ namespace Oceanic_Airlines.Business_Logic
 			finalResultPaths = new List<ResultPathDTO>();
 		}
 
-		public void PrepareDijkstra()
-		{
-		}
+        private void SetupTheGraph()
+        {
+            List<OceanicAirlines.Models.City> cities = db.Cities.ToList();
+			Dictionary<String, Vertex> vortexSet = new Dictionary<string, Vertex>();
 
-		private void SetupTheGraph()
-		{
-			Vertex a = CreateVertex("A");
-			Vertex b = CreateVertex("B");
-			Vertex c = CreateVertex("C");
-			Vertex d = CreateVertex("D");
 
-			vertices.Add(a);
-			vertices.Add(b);
-			vertices.Add(c);
-			vertices.Add(d);
+			foreach (OceanicAirlines.Models.City city in cities)
+            {
+                Vertex a = CreateVertex(city.Name);
+                vertices.Add(a);
+                vortexSet.Add(city.Name, a);
+            }
 
-			edges.Add(CreateEdge(a, b, CreateWeight(5)));
-			edges.Add(CreateEdge(a, c, CreateWeight(6)));
-			edges.Add(CreateEdge(b, c, CreateWeight(7)));
-			edges.Add(CreateEdge(b, d, CreateWeight(8)));
-			edges.Add(CreateEdge(c, d, CreateWeight(9)));
-		}
+            foreach (OceanicAirlines.Models.City city in cities)
+			{
+				List<OceanicAirlines.Models.Route> routes = city.OriginCityRoutes.ToList();
+				foreach (OceanicAirlines.Models.Route route in routes)
+                {
+                    Edge newEdge = CreateEdge(vortexSet[city.Name], vortexSet[route.Destination.Name], CreateWeight(8));
+                    if (!edges.Contains(newEdge))
+                    {
+                        edges.Add(newEdge);
+					}
+				}
+				
+			}
+        }
 
 		private void setupTestData()
 		{
@@ -104,8 +112,8 @@ namespace Oceanic_Airlines.Business_Logic
 			PathFinderFactory pathFinderFactory = new PathFinderFactoryYanQi();
 			// Alternative implementation:
 			//PathFinderFactory pathFinderFactory = new PathFinderFactoryBsmock();
-			setupTestData();
-
+			//setupTestData();
+			SetupTheGraph();
 			Graph graph = CreateGraph(edges);
 
 			PathFinder pathFinder = pathFinderFactory.CreatePathFinder(graph);

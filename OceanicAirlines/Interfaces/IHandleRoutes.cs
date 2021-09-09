@@ -8,7 +8,6 @@ namespace Oceanic_Airlines.Interfaces
 {
     public interface IHandleRoutes
     {
-        void PrepareDijkstra();
         string PrepareKShortestPaths();
     }
 
