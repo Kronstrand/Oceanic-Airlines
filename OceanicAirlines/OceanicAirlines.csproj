@@ -52,6 +52,27 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Priority Queue, Version=4.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OptimizedPriorityQueue.4.1.1\lib\net45\Priority Queue.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Adaptee.Bsmock, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Adaptee.Bsmock.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Adaptee.YanQi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Adaptee.YanQi.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Adaptees.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Adaptees.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Adapter.Bsmock, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Adapter.Bsmock.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Adapter.YanQi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Adapter.YanQi.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -142,9 +163,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Business Logic\HandleRoutes.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
+    <Compile Include="Controllers\SearchRouteController.cs" />
     <Compile Include="DataAccessLayer\OceanicAirlinesInitializer.cs" />
     <Compile Include="DataAccessLayer\OceanicAirlinesContext.cs" />
     <Compile Include="DTO\RouteDetailsDTO.cs" />
@@ -152,6 +175,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IHandleRoutes.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Dimensions.cs" />
     <Compile Include="Models\TransportationMethod.cs" />
@@ -183,6 +207,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <None Include="Views\SearchRoute\SearchRoute.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
