@@ -8,7 +8,7 @@ namespace Oceanic_Airlines.Api
     {
         public IHttpActionResult Post(RouteSearchDTO search)
         {
-            return Json(new RouteDetailsDTO { Price = 200, TravelTime = 8 });
+            return Json(new RouteDetailsDTO { Price = 200, TravelTime = 8, ErrorMessage = ""});
         }
     }
 }
