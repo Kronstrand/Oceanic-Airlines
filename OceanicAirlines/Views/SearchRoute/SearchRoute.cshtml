@@ -1,6 +1,8 @@
-﻿@{
+﻿@using OceanicAirlines.Models
+@{
     ViewBag.Title = "Search For Route";
 }
+@model Parcel
 @Styles.Render("~/Content/css/SearchRoute.css")
 <div class="col-lg-12">
     <div class="col-lg-2"></div>
@@ -22,16 +24,38 @@
             </div>
             <br />
             <br />
-            <br />
-            <label id="WeightLabel">Weight</label>
-            <br />
-            <input type="text" id="Weight" name="Weight" value="" />
-            <br />
-            <br />
-            <label id="WeightLabel">Discount</label>
-            <br />
-            <input type="number" id="Discount" name="Discount" value="" />
-            <br />
+            <div class="col-lg-6">
+                <label id="WeightLabel">Weight</label>
+                <br />
+                <input type="text" id="Weight" name="Weight" value="" />
+                <br />
+                <label id="DiscountLabel">Discount</label>
+                <br />
+                <input type="number" id="Discount" name="Discount" value="" />
+                <br />
+                <label id="ParcelTypeLabel">Parcel Type</label>
+                <br />
+                @Html.DropDownList("ParcelType",
+                    new SelectList(Enum.GetValues(typeof(ParcelType))),
+                    "Select",
+                    new { @class = "form-control" })
+            </div>
+            <div class="col-lg-6">
+                <label id="XLabel">X [cm]</label>
+                <br />
+                <input type="number" id="XInput" name="XInput" value="" />
+                <br />
+                <label id="YLabel">Y [cm]</label>
+                <br />
+                <input type="number" id="YInput" name="YInput" value="" />
+                <br />
+                <label id="ZLabel">Z [cm]</label>
+                <br />
+                <input type="number" id="ZInput" name="ZInput" value="" />
+                <br />
+                <br />
+                <br />
+            </div>
             <button type="submit" class="btn submit-button">SEARCH</button>
         </form>
     </div>
