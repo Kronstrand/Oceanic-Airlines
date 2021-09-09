@@ -4,9 +4,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Oceanic_Airlines.DTO;
 
 namespace Oceanic_Airlines.Api
 {
+    [Route("api/GetRouteDetails")]
+
     public class OceanicAirlinesApiController : ApiController
     {
         // GET api/<controller>
@@ -22,8 +25,11 @@ namespace Oceanic_Airlines.Api
         }
 
         // POST api/<controller>
-        public void Post([FromBody] string value)
+        
+
+        public IHttpActionResult Post([FromBody] string value)
         {
+            return Json(new RouteDetailsDTO { price = 200, travelTime = 8 });
         }
 
         // PUT api/<controller>/5
