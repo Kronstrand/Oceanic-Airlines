@@ -217,7 +217,7 @@ namespace OceanicAirlines.DataAccessLayer
                     OriginID = GetCityID(context, splits[0]),
                     DestinationID = GetCityID(context, splits[1]),
                     TransportationMethodID = GetTransportID(context, splits[2]),
-                    Timespan = TimeSpan.FromHours(Int32.Parse(splits[3])),
+                    Timespan = string.IsNullOrEmpty(splits[3]) ? (TimeSpan?) null : TimeSpan.FromHours(Int32.Parse(splits[3])),
                     Available = splits[4] == "true" ? true : false
                 };
                 context.Routes.Add(route);
