@@ -1,1 +1,167 @@
-Tanger,Tripoli,0,8,true
+Addis Abeba,Kap Guardafui,0,,true
+Addis Abeba,Suakin,0,,true
+Addis Abeba,Victoriasøen,0,,true
+Bahr el Ghazal,Darfur,0,,true
+Bahr el Ghazal,Victoriasøen,0,,true
+Cairo,Omdurman,0,,true
+Congo,Wadai,0,,true
+Dakar,Marrakesh,0,,true
+Dakar,Sierra Leone,0,,true
+Darfur,Bahr el Ghazal,0,,true
+Darfur,Congo,0,,true
+Darfur,Omdurman,0,,true
+Darfur,Sahara,0,,true
+Darfur,Slavekysten,0,,true
+Darfur,Suakin,0,,true
+Darfur,Wadai,0,,true
+Dragebjerget,Luanda,0,,true
+Dragebjerget,Mocambique,0,,true
+Dragebjerget,Victoria Faldene,0,,true
+Guldkysten,Sierra Leone,0,,true
+Guldkysten,Timbuktu,0,,true
+Hvalbugten,Kapstaden,0,,true
+Hvalbugten,Victoria Faldene,0,,true
+Kabalo,Luanda,0,,true
+Kabalo,Victoriasøen,0,,true
+Kap Guardafui,Addid Abeba,0,,true
+Kap Guardafui,Zanzibar,0,,true
+Kapstaden,Hvalbugten,0,,true
+Luanda,Congo,0,,true
+Luanda,Dragebjerget,0,,true
+Luanda,Kabalo,0,,true
+Luanda,Mocambique,0,,true
+Luanda,Victoria Faldene,0,,true
+Marrakesh,Tanger,0,,true
+Marrakesh,Dakar,0,,true
+Marrakesh,Sahara,0,,true
+Mocambique,Dragebjerget,0,,true
+Mocambique,Luanda,0,,true
+Mocambique,Victoria Faldene,0,,true
+Mocambique,Victoriasøen,0,,true
+Mocambique,Zanzibar,0,,true
+Omdurman,Cairo,0,,true
+Omdurman,Darfur,0,,true
+Omdurman,Tripoli,0,,true
+Sahara,Darfur,0,,true
+Sahara,Marrakesh,0,,true
+Sahara,Tanger,0,,true
+Sierra Leone,Dakar,0,,true
+Sierra Leone,Guldkysten,0,,true
+Sierra Leone,Timbuktu,0,,true
+Slavekysten,Congo,0,,true
+Slavekysten,Darfur,0,,true
+Slavekysten,Timbuktu,0,,true
+Slavekysten,Wadai,0,,true
+Suakin,Addis Abeba,0,,true
+Suakin,Darfur,0,,true
+Tanger,Marrakesh,0,,true
+Tanger,Sahara,0,,true
+Tanger,Tunis,0,,true
+Timbuktu,Guldkysten,0,,true
+Timbuktu,Sierra Leone,0,,true
+Timbuktu,Slavekysten,0,,true
+Tripoli,Omdurman,0,,true
+Tripoli,Tunis,0,,true
+Tunis,Tanger,0,,true
+Tunis,Tripoli,0,,true
+Victoria Faldene,Dragebjerget,0,,true
+Victoria Faldene,Hvalbugten,0,,true
+Victoria Faldene,Luanda,0,,true
+Victoria Faldene,Mocambique,0,,true
+Victoriasøen,Addis Abeba,0,,true
+Victoriasøen,Bahr el Ghazal,0,,true
+Victoriasøen,Kabalo,0,,true
+Victoriasøen,Mocambique,0,,true
+Victoriasøen,Zanzibar,0,,true
+Wadai,Congo,0,,true
+Wadai,Darfur,0,,true
+Wadai,Slavekysten,0,,true
+Zanzibar,Kap Guardafui,0,,true
+Zanzibar,Mocambique,0,,true
+Zanzibar,Victoriasøen,0,,true
+Cairo,Tunis,1,0,true
+Cairo,Suakin,1,0,true
+Dakar,De Kanariske Øer,1,0,true
+Dakar,Sierra Leone,1,0,true
+Dakar,St. Helena,1,0,true
+De Kanariske Øer,Dakar,1,0,true
+De Kanariske Øer,Tanger,1,0,true
+Guldkysten,Hvalbugten,1,0,true
+Guldkysten,Sierra Leone,1,0,true
+Guldkysten,Slavekysten,1,0,true
+Hvalbugten,Guldkysten,1,0,true
+Hvalbugten,Kapstaden,1,0,true
+Hvalbugten,Slavekysten,1,0,true
+Hvalbugten,St. Helena,1,0,true
+Kap Guardafui,Mocambique,1,0,true
+Kap Guardafui,Suakin,1,0,true
+Kap Guardafui,Tamatave,1,0,true
+Kap St. Marie,Kapstaden,1,0,true
+Kap St. Marie,Mocambique,1,0,true
+Kapstaden,Hvalbugten,1,0,true
+Kapstaden,Kap St. Marie,1,0,true
+Kapstaden,St. Helena,1,0,true
+Mocambique,Kap Guardafui,1,0,true
+Mocambique,Kap St. Marie,1,0,true
+Sierra Leone,Guldkysten,1,0,true
+Sierra Leone,Dakar,1,0,true
+Sierra Leone,St. Helena,1,0,true
+Slavekysten,Guldkysten,1,0,true
+Slavekysten,Hvalbugten,1,0,true
+St. Helena,Dakar,1,0,true
+St. Helena,Hvalbugten,1,0,true
+St. Helena,Kapstaden,1,0,true
+St. Helena,Sierra Leone,1,0,true
+Suakin,Cairo,1,0,true
+Suakin,Kap Guardafui,1,0,true
+Tanger,De Kanariske Øer,1,0,true
+Tanger,Tunis,1,0,true
+Tamatave,Kap Guardafui,1,0,true
+Tunis,Cairo,1,0,true
+Tunis,Tanger,1,0,true
+Cairo,Suakin,2,8,true
+Darfur,Kabalo,2,8,true
+Darfur,Suakin,2,8,true
+Darfur,Tripoli,2,8,true
+Dragebjerget,Kapstaden,2,8,true
+Dragebjerget,Victoriasøen,2,8,true
+Guldkysten,Hvalbugten,2,8,true
+Guldkysten,Luanda,2,8,true
+Guldkysten,Marrakesh,2,8,true
+Guldkysten,Tripoli,2,8,true
+Hvalbugten,Guldkysten,2,8,true
+Hvalbugten,Kapstaden,2,8,true
+Hvalbugten,Luanda,2,8,true
+Kabalo,Darfur,2,8,true
+Kabalo,Kapstaden,2,8,true
+Kap Guardafui,Tamatave,2,8,true
+Kap Guardafui,Victoriasøen,2,8,true
+Kap St. Marie,Kapstaden,2,8,true
+Kapstaden,Dragebjerget,2,8,true
+Kapstaden,Hvalbugten,2,8,true
+Kapstaden,Kabalo,2,8,true
+Kapstaden,Kap St. Marie,2,8,true
+Kapstaden,St. Helena,2,8,true
+Kapstaden,Tamatave,2,8,true
+Luanda,Guldkysten,2,8,true
+Luanda,Hvalbugten,2,8,true
+Marrakesh,Guldkysten,2,8,true
+Marrakesh,Sierra Leone,2,8,true
+Marrakesh,Tanger,2,8,true
+Sierra Leone,Marrakesh,2,8,true
+Sierra Leone,St. Helena,2,8,true
+St. Helena,Kapstaden,2,8,true
+St. Helena,Sierra Leone,2,8,true
+Suakin,Cairo,2,8,true
+Suakin,Darfur,2,8,true
+Suakin,Victoriasøen,2,8,true
+Tanger,Marrakesh,2,8,true
+Tanger,Tripoli,2,8,true
+Tamatave,Kap Guardafui,2,8,true
+Tamatave,Kapstaden,2,8,true
+Tripoli,Darfur,2,8,true
+Tripoli,Guldkysten,2,8,true
+Tripoli,Tanger,2,8,true
+Victoriasøen,Dragebjerget,2,8,true
+Victoriasøen,Kap Guardafui,2,8,true
+Victoriasøen,Suakin,2,8,true
