@@ -135,6 +135,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\EastIndiaTradingCoApiController.cs" />
+    <Compile Include="Api\OceanicAirlinesApiController.cs" />
+    <Compile Include="Api\TelstarLogisticsApiController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -144,6 +147,8 @@
     <Compile Include="Controllers\RouteController.cs" />
     <Compile Include="DataAccessLayer\OceanicAirlinesInitializer.cs" />
     <Compile Include="DataAccessLayer\OceanicAirlinesContext.cs" />
+    <Compile Include="DTO\RouteDetailsDTO.cs" />
+    <Compile Include="DTO\RouteSearchDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
