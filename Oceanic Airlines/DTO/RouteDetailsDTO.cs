@@ -7,7 +7,7 @@ namespace Oceanic_Airlines.DTO
 {
     public class RouteDetailsDTO
     {
-        public double price { get; set; }
-        public int travelTime { get; set; }
+        public double Price { get; set; }
+        public int TravelTime { get; set; }
     }
 }
