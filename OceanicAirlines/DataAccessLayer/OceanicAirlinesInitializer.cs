@@ -4,6 +4,7 @@ using System.Linq;
 using System.Data.Entity;
 using OceanicAirlines.Models;
 using System.IO;
+using System.Globalization;
 
 namespace OceanicAirlines.DataAccessLayer
 {
@@ -15,9 +16,9 @@ namespace OceanicAirlines.DataAccessLayer
             AddCity(context, "C:\\Users\\emid\\OneDrive - Netcompany\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\Cities.txt");
             AddDimensions(context, "C:\\Users\\emid\\OneDrive - Netcompany\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\Dimensions.txt");
             AddParcels(context, "C:\\Users\\emid\\OneDrive - Netcompany\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\Parcels.txt");
+            AddTransportationMethods(context, "C:\\Users\\emid\\OneDrive - Netcompany\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\TransportationMethod.txt");
             AddRoutes(context, "C:\\Users\\emid\\OneDrive - Netcompany\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\Routes.txt");
             AddShipments(context, "C:\\Users\\emid\\OneDrive - Netcompany\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\Shipments.txt");
-            AddTransportationMethods(context, "C:\\Users\\emid\\OneDrive - Netcompany\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\TransportationMethod.txt");
             AddUsers(context, "C:\\Users\\emid\\OneDrive - Netcompany\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\User.txt");
         }
 
@@ -30,9 +31,23 @@ namespace OceanicAirlines.DataAccessLayer
             var file = GetFile(path);
             while ((line = file.ReadLine()) != null)
             {
-
+                var splits = line.Split(',').ToList();
+                if (splits.Count != 3)
+                {
+                    continue;
+                }
+                var user = new User
+                {
+                    UserID = Guid.NewGuid(),
+                    Name = splits[0],
+                    Email = splits[1],
+                    Password = splits[2],
+                };
+                context.Users.Add(user);
+                counter++;
             }
             file.Close();
+            context.SaveChanges();
             Console.WriteLine("There were {0} lines.", counter);
         }
 
@@ -45,9 +60,22 @@ namespace OceanicAirlines.DataAccessLayer
             var file = GetFile(path);
             while ((line = file.ReadLine()) != null)
             {
-
+                var splits = line.Split(',').ToList();
+                if (splits.Count != 2)
+                {
+                    continue;
+                }
+                var method = new TransportationMethod
+                {
+                    TransportationMethodID = Guid.NewGuid(),
+                    Company = (Company)Enum.ToObject(typeof(Company), Int32.Parse(splits[0])),
+                    TransportationType = (TransportationType)Enum.ToObject(typeof(TransportationType), Int32.Parse(splits[1])),
+                };
+                context.TransportationMethods.Add(method);
+                counter++;
             }
             file.Close();
+            context.SaveChanges();
             Console.WriteLine("There were {0} lines.", counter);
         }
 
@@ -75,10 +103,52 @@ namespace OceanicAirlines.DataAccessLayer
             var file = GetFile(path);
             while ((line = file.ReadLine()) != null)
             {
-
+                var splits = line.Split(',').ToList();
+                if (splits.Count != 7)
+                {
+                    continue;
+                }
+                var parcel = new Parcel
+                {
+                    ParcelID = Guid.NewGuid(),
+                    ParcelType = (ParcelType)Enum.ToObject(typeof(ParcelType), Int32.Parse(splits[0])),
+                    Weight = Double.Parse(splits[1]),
+                    OriginID = GetCityID(context, splits[2]),
+                    DestinationID = GetCityID(context, splits[3]),
+                    Discount = Double.Parse(splits[4]),
+                    ShippingDate = DateTime.ParseExact(splits[5], "dd/mm/yyyy", CultureInfo.InvariantCulture),
+                    DimensionsID = GetDimentionsID(context, splits[6])
+                };
+                context.Parcels.Add(parcel);
+                counter++;
             }
             file.Close();
+            context.SaveChanges();
             Console.WriteLine("There were {0} lines.", counter);
+        }
+
+        private Guid GetDimentionsID(OceanicAirlinesContext context, string categoryString)
+        {
+            var category = (Category)Enum.ToObject(typeof(Category), Int32.Parse(categoryString));
+            var dimensionsID = context.Dimensions.Where(x => x.Category == category).Select(x => x.DimensionsID).FirstOrDefault();
+            if (dimensionsID != null)
+            {
+                return dimensionsID;
+            }
+            return context.Dimensions.Select(x => x.DimensionsID).FirstOrDefault();
+        }
+
+        private Guid GetCityID(OceanicAirlinesContext context, string cityName)
+        {
+            var cityID = context.Cities.Where(x => x.Name == cityName).Select(x => x.CityID).FirstOrDefault();
+            if (cityID != null)
+            {
+                return cityID;
+            }
+            var city = new City { CityID = Guid.NewGuid(), Name = cityName };
+            context.Cities.Add(city);
+            context.SaveChanges();
+            return city.CityID;
         }
 
         private void AddDimensions(OceanicAirlinesContext context, string path)
@@ -90,9 +160,23 @@ namespace OceanicAirlines.DataAccessLayer
             var file = GetFile(path);
             while ((line = file.ReadLine()) != null)
             {
-                
+                var splits = line.Split(',').ToList();
+                if(splits.Count != 4)
+                {
+                    continue;
+                }
+                var dimension = new Dimensions { 
+                    DimensionsID = Guid.NewGuid(), 
+                    Category = (Category)Enum.ToObject(typeof(Category), Int32.Parse(splits[0])),
+                    Depth = Double.Parse(splits[1]),
+                    Width = Double.Parse(splits[2]),
+                    Length = Double.Parse(splits[3]),
+                };
+                context.Dimensions.Add(dimension);
+                counter++;
             }
             file.Close();
+            context.SaveChanges();
             Console.WriteLine("There were {0} lines.", counter);
         }
 
@@ -110,6 +194,7 @@ namespace OceanicAirlines.DataAccessLayer
                 counter++;
             }
             file.Close();
+            context.SaveChanges();
             Console.WriteLine("There were {0} lines.", counter);
         }
 
@@ -121,10 +206,37 @@ namespace OceanicAirlines.DataAccessLayer
             var file = GetFile(path);
             while ((line = file.ReadLine()) != null)
             {
-
+                var splits = line.Split(',').ToList();
+                if (splits.Count != 5)
+                {
+                    continue;
+                }
+                var route = new Route
+                {
+                    RouteID = Guid.NewGuid(),
+                    OriginID = GetCityID(context, splits[0]),
+                    DestinationID = GetCityID(context, splits[1]),
+                    TransportationMethodID = GetTransportID(context, splits[2]),
+                    Timespan = TimeSpan.FromHours(Int32.Parse(splits[3])),
+                    Available = splits[4] == "true" ? true : false
+                };
+                context.Routes.Add(route);
+                counter++;
             }
             file.Close();
+            context.SaveChanges();
             Console.WriteLine("There were {0} lines.", counter);
+        }
+
+        private Guid GetTransportID(OceanicAirlinesContext context, string companyString)
+        {
+            var company = (Company)Enum.ToObject(typeof(Company), Int32.Parse(companyString));
+            var methodID = context.TransportationMethods.Where(x => x.Company == company).Select(x => x.TransportationMethodID).FirstOrDefault();
+            if (methodID != null)
+            {
+                return methodID;
+            }
+            return context.TransportationMethods.Select(x => x.TransportationMethodID).FirstOrDefault();
         }
 
         private StreamReader GetFile(string path)

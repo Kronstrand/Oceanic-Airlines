@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace OceanicAirlines.Models
 {
     public enum Company { TelstarLogistics, EastIndiaTrading, OceanicAirlines}
-    public enum TransportationType { TelstarLogistics, EastIndiaTrading, OceanicAirlines}
+    public enum TransportationType { Truck, Ship, Airplan}
     public class TransportationMethod
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
