@@ -129,6 +129,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\EastIndiaTradingCoApiController.cs" />
+    <Compile Include="Api\OceanicAirlinesApiController.cs" />
+    <Compile Include="Api\TelstarLogisticsApiController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
