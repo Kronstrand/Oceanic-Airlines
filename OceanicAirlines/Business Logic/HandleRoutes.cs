@@ -20,13 +20,19 @@ namespace Oceanic_Airlines.Business_Logic
 {
 	public class HandleRoutes : IHandleRoutes
 	{
-        private OceanicAirlinesContext db = new OceanicAirlinesContext();
+        private OceanicAirlinesContext db; 
 
 		List<Vertex> vertices;
 		IList<Edge> edges;
+        private List<OceanicAirlines.Models.City> cities;
+        private Dictionary<String, Vertex> vortexSet;
 		List<ResultPathDTO> finalResultPaths;
 		public HandleRoutes()
 		{
+            if (db == null)
+            { 
+                db = new OceanicAirlinesContext();
+			}
 			vertices = new List<Vertex>();
 			edges = new List<Edge>();
 			finalResultPaths = new List<ResultPathDTO>();
@@ -34,8 +40,11 @@ namespace Oceanic_Airlines.Business_Logic
 
         private void SetupTheGraph()
         {
-            List<OceanicAirlines.Models.City> cities = db.Cities.ToList();
-			Dictionary<String, Vertex> vortexSet = new Dictionary<string, Vertex>();
+            if (cities == null)
+            {
+                cities = db.Cities.ToList();
+            }
+			vortexSet = new Dictionary<string, Vertex>();
 
 
 			foreach (OceanicAirlines.Models.City city in cities)
@@ -53,7 +62,10 @@ namespace Oceanic_Airlines.Business_Logic
                     Edge newEdge = CreateEdge(vortexSet[city.Name], vortexSet[route.Destination.Name], CreateWeight(8));
                     if (!edges.Contains(newEdge))
                     {
-                        edges.Add(newEdge);
+                        if (route.Available)
+                        {
+                            edges.Add(newEdge);
+						}
 					}
 				}
 				
@@ -110,10 +122,8 @@ namespace Oceanic_Airlines.Business_Logic
 		public String PrepareKShortestPaths()
 		{
 			PathFinderFactory pathFinderFactory = new PathFinderFactoryYanQi();
-			// Alternative implementation:
-			//PathFinderFactory pathFinderFactory = new PathFinderFactoryBsmock();
-			//setupTestData();
-			SetupTheGraph();
+			setupTestData();
+			//SetupTheGraph();
 			Graph graph = CreateGraph(edges);
 
 			PathFinder pathFinder = pathFinderFactory.CreatePathFinder(graph);
@@ -136,6 +146,11 @@ namespace Oceanic_Airlines.Business_Logic
 		{
 			return finalResultPaths;
 		}
+
+        public List<OceanicAirlines.Models.City> GetCitiesList()
+        {
+            return cities;
+        }
 
 		public void SetAnotherFinalResultPathDTO(ResultPathDTO newDTOPath)
 		{

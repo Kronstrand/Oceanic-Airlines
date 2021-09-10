@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OceanicAirlines.ViewModels;
 
 namespace OceanicAirlines.Controllers
 {
@@ -20,7 +21,14 @@ namespace OceanicAirlines.Controllers
             {
                 ViewBag.Message += result.getMessageString();
             }
-            return View();
+
+            OceanicAirlines.ViewModels.SearchRouteViewModel model = new SearchRouteViewModel();
+            model.cities = routes.GetCitiesList();
+            if (model.cities == null)
+            {
+                return View();
+            }
+            return View(model);
         }
     }
 }

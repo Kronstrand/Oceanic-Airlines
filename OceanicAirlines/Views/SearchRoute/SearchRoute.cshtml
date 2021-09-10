@@ -2,8 +2,10 @@
 @{
     ViewBag.Title = "Search For Route";
 }
-@model Parcel
+@model OceanicAirlines.ViewModels.SearchRouteViewModel
 @Styles.Render("~/Content/css/SearchRoute.css")
+
+@Scripts.Render("~/bundles/SearchRoute")
 <div class="col-lg-12">
     <div class="col-lg-2"></div>
     <div class="col-lg-6 search-box-form">
@@ -17,43 +19,43 @@
             <br />
 
             <div class="col-lg-4" id="bloodhound">
-                <input class="typeahead" id="OriginCity" name="OriginCity" type="text" placeholder="Search...">
+                @Html.TextBoxFor(model => model.OriginCity, new { @class = "form-control", @id = "OriginCity", @name= "OriginCity", @placeholder = "Search..." })
             </div>
             <div class="col-lg-6" id="bloodhound2">
-                <input class="typeahead" id="DestinationCity" name="DestinationCity" type="text" placeholder="Search...">
+                @Html.TextBoxFor(model => model.DestinationCity, new { @class = "form-control", @id = "DestinationCity", @name = "DestinationCity", @placeholder = "Search..." })
             </div>
             <br />
             <br />
             <div class="col-lg-6">
                 <label id="WeightLabel">Weight</label>
                 <br />
-                <input type="text" id="Weight" name="Weight" value="" />
+                @Html.TextBoxFor(model => model.Weight, new { @class = "form-control", @id = "Weight", @placeholder = "" })
                 <br />
                 <label id="DiscountLabel">Discount</label>
                 <br />
-                <input type="number" id="Discount" name="Discount" value="" />
+                @Html.TextBoxFor(model => model.Discount, new { @class = "form-control", @id = "Discount", @placeholder = "" })
+
                 <br />
                 <label id="ParcelTypeLabel">Parcel Type</label>
                 <br />
-                @Html.DropDownList("ParcelType",
-                    new SelectList(Enum.GetValues(typeof(ParcelType))),
-                    "Select",
-                    new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.ParcelTypeEnumValue,
+                    new SelectList(Enum.GetValues(typeof(ParcelType)), 1, "Value"), new { id = "ParcelTypeSelect" })
+
             </div>
             <div class="col-lg-6">
                 <label id="XLabel">X [cm]</label>
                 <br />
-                <input type="number" id="XInput" name="XInput" value="" />
+                @Html.TextBoxFor(model => model.X, new { @class = "form-control", @id = "XInput", @name = "XInput", @placeholder = "" })
+
                 <br />
                 <label id="YLabel">Y [cm]</label>
                 <br />
-                <input type="number" id="YInput" name="YInput" value="" />
+                @Html.TextBoxFor(model => model.Y, new { @class = "form-control", @id = "YInput", @name = "YInput", @placeholder = "" })
                 <br />
                 <label id="ZLabel">Z [cm]</label>
                 <br />
-                <input type="number" id="ZInput" name="ZInput" value="" />
-                <br />
-                <br />
+                @Html.TextBoxFor(model => model.Z, new { @class = "form-control", @id = "ZInput", @name = "ZInput", @placeholder = "" })
+
                 <br />
             </div>
             <button type="submit" class="btn submit-button">SEARCH</button>

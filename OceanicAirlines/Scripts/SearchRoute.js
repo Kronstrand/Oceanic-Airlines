@@ -32,10 +32,10 @@ var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
 ];
 
 $('#the-basics .typeahead').typeahead({
-    hint: true,
-    highlight: true,
-    minLength: 1
-},
+        hint: true,
+        highlight: true,
+        minLength: 1
+    },
     {
         name: 'states',
         source: substringMatcher(states)

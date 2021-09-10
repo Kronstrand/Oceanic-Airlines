@@ -45,7 +45,7 @@ textarea {
     margin: 0 0 0 1em;
 }
 
-#WeightLabel, #DiscountLabel, #ParcelTypeLabel {
+#WeightLabel, #DiscountLabel, #ParcelTypeLabel, #ParcelTypeSelect, #DestinationCity, #OriginCity, #ParcelTypeSelect {
     margin: 0 0 0 1em;
 }
 
@@ -56,14 +56,14 @@ textarea {
     height: 2em;
 }
 
-#ParcelType {
-    width: 13.5em;
+#ParcelType, #ParcelTypeSelect, #OriginCity {
+    width: 20em;
     color: #E5E5E5;
     font-family: Roboto, Arial;
     height: 2em;
 }
 
-input[type="text"], input[type="number"], textarea, #ParcelType {
+input[type="text"], input[type="number"], textarea, #ParcelType, #ParcelTypeSelect {
     background: #000000;
     height: 2em;
 }
@@ -74,6 +74,10 @@ label {
 
 ::placeholder {
     padding-left: 2em;
+}
+
+#ParcelTypeSelect {
+    margin-left: 2em;
 }
 
 .submit-button {
