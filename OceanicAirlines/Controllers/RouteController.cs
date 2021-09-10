@@ -80,11 +80,15 @@ namespace OceanicAirlines.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RouteID,Method,Timespan,Available")] Route route)
+        public ActionResult Edit([Bind(Include = "RouteID,Available")] Route route)
         {
+            var r = db.Routes.First(a => a.RouteID == route.RouteID);
+            r.Available = route.Available;
+            
             if (ModelState.IsValid)
             {
-                db.Entry(route).State = EntityState.Modified;
+                //db.Entry(updateRoute).State = EntityState.Modified;
+                //db.SaveChanges();
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

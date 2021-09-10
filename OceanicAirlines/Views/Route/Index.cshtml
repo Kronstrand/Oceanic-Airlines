@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Origin.Name)
+            @Html.DisplayNameFor(model => model.Origin)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Destination.Name)
+            @Html.DisplayNameFor(model => model.Destination)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TransportationMethod)
@@ -32,13 +32,13 @@
 @foreach (var item in Model) {
 <tr>
     <th>
-        @Html.DisplayNameFor(model => model.Origin)
+        @Html.DisplayFor(model => item.Origin.Name)
     </th>
     <th>
-        @Html.DisplayNameFor(model => model.Destination)
+        @Html.DisplayFor(model => item.Destination.Name)
     </th>
     <td>
-        @Html.DisplayFor(modelItem => item.TransportationMethod)
+        @Html.DisplayFor(modelItem => item.TransportationMethod.Company)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.Timespan)
@@ -47,9 +47,7 @@
         @Html.DisplayFor(modelItem => item.Available)
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.RouteID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.RouteID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.RouteID })
+        @Html.ActionLink("Edit", "Edit", new { id = item.RouteID })
     </td>
 </tr>
 }

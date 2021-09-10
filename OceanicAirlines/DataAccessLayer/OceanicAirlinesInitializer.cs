@@ -14,13 +14,13 @@ namespace OceanicAirlines.DataAccessLayer
         protected override void Seed(OceanicAirlinesContext context)
         {
             // Setup cities
-            AddCity(context, "C:\\Users\\alro.NCLAN\\Desktop\\oceanic-airlines\\OceanicAirlines\\DataSetup\\Cities.txt");
-            AddDimensions(context, "C:\\Users\\alro.NCLAN\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\Dimensions.txt");
-            AddParcels(context, "C:\\Users\\alro.NCLAN\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\Parcels.txt");
-            AddTransportationMethods(context, "C:\\Users\\alro.NCLAN\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\TransportationMethod.txt");
-            AddRoutes(context, "C:\\Users\\alro.NCLAN\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\Routes.txt");
-            AddShipments(context, "C:\\Users\\alro.NCLAN\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\Shipments.txt");
-            AddUsers(context, "C:\\Users\\alro.NCLAN\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\User.txt");
+            AddCity(context, "C:\\Users\\kron\\source\\repos\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\Cities.txt");
+            AddDimensions(context, "C:\\Users\\kron\\source\\repos\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\Dimensions.txt");
+            AddParcels(context, "C:\\Users\\kron\\source\\repos\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\Parcels.txt");
+            AddTransportationMethods(context, "C:\\Users\\kron\\source\\repos\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\TransportationMethod.txt");
+            AddRoutes(context, "C:\\Users\\kron\\source\\repos\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\Routes.txt");
+            AddShipments(context, "C:\\Users\\kron\\source\\repos\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\Shipments.txt");
+            AddUsers(context, "C:\\Users\\kron\\source\\repos\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\User.txt");
         }
 
         private void AddUsers(OceanicAirlinesContext context, string path)
