@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Programmerare.ShortestPaths.Adapter.YanQi</name>
+    </assembly>
+    <members>
+        <member name="T:Programmerare.ShortestPaths.Adapter.YanQi.Generics.PathFinderYanQiGenerics`4">
+            <summary>
+            "Adapter" implementation of the "Target" interface 
+            https://en.wikipedia.org/wiki/Adapter_pattern
+            </summary>
+            <typeparam name="P">Path</typeparam>
+            <typeparam name="E">Edge</typeparam>
+            <typeparam name="V">Vertex</typeparam>
+            <typeparam name="W">Weight</typeparam>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Adapter.YanQi.Generics.PathFinderYanQiGenerics`4.FindShortestPathHook(`2,`2,System.Int32)">
+            <summary>
+            Note that currently there seem to be no way for the "yanqi" implementation to actually specify the number 
+            of shortest paths to return, but it seems to find all paths.
+            However, the implementation of this method instead takes care of reducing the result.
+            Otherwise, if the semantic of the method is not respected it can not for example be tested 
+            against results from other implementations since then they would return a different number of paths.
+            </summary>
+            <param name="startVertex"></param>
+            <param name="endVertex"></param>
+            <param name="maxNumberOfPaths"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

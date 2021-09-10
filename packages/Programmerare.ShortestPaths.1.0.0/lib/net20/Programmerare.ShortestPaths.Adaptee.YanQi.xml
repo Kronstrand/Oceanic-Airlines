@@ -1,0 +1,405 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Programmerare.ShortestPaths.Adaptee.YanQi</name>
+    </assembly>
+    <members>
+        <member name="T:edu.asu.emit.algorithm.graph.abstraction.BaseElementWithWeight">
+            The interface defines a weighted element in graph. It could be for
+            a vertex or an edge. 
+             
+            @author yqi
+            
+            Regarding the above javadoc author statement it applies to the original Java code found here:
+            https://github.com/yan-qi/k-shortest-paths-java-version
+            Regarding the translation of that Java code to this .NET code, see the top of this source file for more information.
+        </member>
+        <member name="T:edu.asu.emit.algorithm.graph.abstraction.BaseGraph">
+            The interface defines a graph.
+            
+            @author yqi
+            
+            Regarding the above javadoc author statement it applies to the original Java code found here:
+            https://github.com/yan-qi/k-shortest-paths-java-version
+            Regarding the translation of that Java code to this .NET code, see the top of this source file for more information.
+        </member>
+        <member name="T:edu.asu.emit.algorithm.graph.abstraction.BaseVertex">
+            The interface defines a vertex in graph
+            
+            @author yqi
+            
+            Regarding the above javadoc author statement it applies to the original Java code found here:
+            https://github.com/yan-qi/k-shortest-paths-java-version
+            Regarding the translation of that Java code to this .NET code, see the top of this source file for more information.
+        </member>
+        <member name="T:edu.asu.emit.algorithm.graph.Graph">
+            The class defines a directed graph.
+            
+            @author yqi
+            
+            Regarding the above javadoc author statement it applies to the original Java code found here:
+            https://github.com/yan-qi/k-shortest-paths-java-version
+            Regarding the translation of that Java code to this .NET code, see the top of this source file for more information.
+            
+            @author Tomas Johansson, implemented (in a fork) a refactoring which extracted code from method 'importFromFile' to 
+            two methods: 'setNumberOfVertices' and 'addEdgeFromStringWithEdgeNamesAndWeight'.
+            For more information about what has changed in the forked version, see the file "NOTICE.txt".
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.Graph.#ctor(System.String)">
+            Constructor 1 
+            @param dataFileName
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.Graph.#ctor(edu.asu.emit.algorithm.graph.Graph)">
+            Constructor 2
+            
+            @param graph
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.Graph.#ctor">
+            Default constructor 
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.Graph.Clear">
+            Clear members of the graph.
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.Graph.ImportFromFile(System.String)">
+            There is a requirement for the input graph. 
+            The ids of vertices must be consecutive. 
+             
+            @param dataFileName
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.Graph.AddEdge(System.Int32,System.Int32,System.Double)">
+            Note that this may not be used externally, because some other members in the class
+            should be updated at the same time. 
+            
+            @param startVertexId
+            @param endVertexId
+            @param weight
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.Graph.ExportToFile(System.String)">
+            Store the graph information into a file. 
+            
+            @param fileName
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.Graph.SetVertexNum(System.Int32)">
+            Set the number of vertices in the graph
+            @param num
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.Graph.GetVertexList">
+            Return the vertex list in the graph.
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.Graph.GetVertex(System.Int32)">
+            Get the vertex with the input id.
+            
+            @param id
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.Graph.AddEdgeFromStringWithEdgeNamesAndWeight(System.String)">
+            @author Tomas Johansson, added this method as a refactoring, by extracting code from method 'importFromFile' into this method. 
+            Fork: https://github.com/TomasJohansson/k-shortest-paths-java-version
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.Graph.SetNumberOfVertices(System.Int32)">
+            @author Tomas Johansson, added this method as a refactoring, by extracting code from method 'importFromFile' into this method. 
+            Fork: https://github.com/TomasJohansson/k-shortest-paths-java-version
+        </member>
+        <member name="T:edu.asu.emit.algorithm.graph.Path">
+            The class defines a path in graph.
+            
+            @author yqi
+            
+            Regarding the above javadoc author statement it applies to the original Java code found here:
+            https://github.com/yan-qi/k-shortest-paths-java-version
+            Regarding the translation of that Java code to this .NET code, see the top of this source file for more information.
+        </member>
+        <member name="T:edu.asu.emit.algorithm.graph.shortestpaths.DijkstraShortestPathAlg">
+            @author <a href='mailto:Yan.Qi@asu.edu'>Yan Qi</a>
+            @version $Revision: 430 $
+            @latest $Date: 2008-07-27 16:31:56 -0700 (Sun, 27 Jul 2008) $
+            
+            Regarding the above javadoc author statement it applies to the original Java code found here:
+            https://github.com/yan-qi/k-shortest-paths-java-version
+            Regarding the translation of that Java code to this .NET code, see the top of this source file for more information.
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.DijkstraShortestPathAlg.#ctor(edu.asu.emit.algorithm.graph.abstraction.BaseGraph)">
+            Default constructor.
+            @param graph
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.DijkstraShortestPathAlg.Clear">
+            Clear intermediate variables.
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.DijkstraShortestPathAlg.GetStartVertexDistanceIndex">
+            Getter for the distance in terms of the start vertex
+            
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.DijkstraShortestPathAlg.GetPredecessorIndex">
+            Getter for the index of the predecessors of vertices
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.DijkstraShortestPathAlg.GetShortestPathTree(edu.asu.emit.algorithm.graph.abstraction.BaseVertex)">
+            Construct a tree rooted at "root" with 
+            the shortest paths to the other vertices.
+            
+            @param root
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.DijkstraShortestPathAlg.GetShortestPathFlower(edu.asu.emit.algorithm.graph.abstraction.BaseVertex)">
+            Construct a flower rooted at "root" with 
+            the shortest paths from the other vertices.
+            
+            @param root
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.DijkstraShortestPathAlg.DetermineShortestPaths(edu.asu.emit.algorithm.graph.abstraction.BaseVertex,edu.asu.emit.algorithm.graph.abstraction.BaseVertex,System.Boolean)">
+            Do the work
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.DijkstraShortestPathAlg.UpdateVertex(edu.asu.emit.algorithm.graph.abstraction.BaseVertex,System.Boolean)">
+            Update the distance from the source to the concerned vertex.
+            @param vertex
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.DijkstraShortestPathAlg.GetShortestPath(edu.asu.emit.algorithm.graph.abstraction.BaseVertex,edu.asu.emit.algorithm.graph.abstraction.BaseVertex)">
+            Note that, the source should not be as same as the sink! (we could extend 
+            this later on)
+             
+            @param sourceVertex
+            @param sinkVertex
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.DijkstraShortestPathAlg.UpdateCostForward(edu.asu.emit.algorithm.graph.abstraction.BaseVertex)">
+            Calculate the distance from the target vertex to the input 
+            vertex using forward star form. 
+            (FLOWER)
+            
+            @param vertex
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.DijkstraShortestPathAlg.CorrectCostBackward(edu.asu.emit.algorithm.graph.abstraction.BaseVertex)">
+            Correct costs of successors of the input vertex using backward star form.
+            (FLOWER)
+            
+            @param vertex
+        </member>
+        <member name="T:edu.asu.emit.algorithm.graph.shortestpaths.YenTopKShortestPathsAlg">
+            @author <a href='mailto:Yan.Qi@asu.edu'>Yan Qi</a>
+            @version $Revision: 783 $
+            @latest $Id: YenTopKShortestPathsAlg.java 783 2009-06-19 19:19:27Z qyan $
+            
+            Regarding the above javadoc author statement it applies to the original Java code found here:
+            https://github.com/yan-qi/k-shortest-paths-java-version
+            Regarding the translation of that Java code to this .NET code, see the top of this source file for more information.
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.YenTopKShortestPathsAlg.#ctor(edu.asu.emit.algorithm.graph.abstraction.BaseGraph)">
+            Default constructor.
+            
+            @param graph
+            @param k
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.YenTopKShortestPathsAlg.#ctor(edu.asu.emit.algorithm.graph.abstraction.BaseGraph,edu.asu.emit.algorithm.graph.abstraction.BaseVertex,edu.asu.emit.algorithm.graph.abstraction.BaseVertex)">
+            Constructor 2
+            
+            @param graph
+            @param sourceVertex
+            @param targetVertex
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.YenTopKShortestPathsAlg.Init">
+            Initiate members in the class. 
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.YenTopKShortestPathsAlg.Clear">
+            Clear the variables of the class. 
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.YenTopKShortestPathsAlg.GetShortestPath(edu.asu.emit.algorithm.graph.abstraction.BaseVertex,edu.asu.emit.algorithm.graph.abstraction.BaseVertex)">
+            Obtain the shortest path connecting the source and the target, by using the
+            classical Dijkstra shortest path algorithm. 
+            
+            @param sourceVertex
+            @param targetVertex
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.YenTopKShortestPathsAlg.HasNext">
+            Check if there exists a path, which is the shortest among all candidates.  
+            
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.YenTopKShortestPathsAlg.Next">
+            Get the shortest path among all that connecting source with targe. 
+            
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.YenTopKShortestPathsAlg.GetShortestPaths(edu.asu.emit.algorithm.graph.abstraction.BaseVertex,edu.asu.emit.algorithm.graph.abstraction.BaseVertex,System.Int32)">
+            Get the top-K shortest paths connecting the source and the target.  
+            This is a batch execution of top-K results.
+            
+            @param source
+            @param sink
+            @param k
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.YenTopKShortestPathsAlg.GetResultList">
+            Return the list of results generated on the whole.
+            (Note that some of them are duplicates)
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.shortestpaths.YenTopKShortestPathsAlg.GetCadidateSize">
+            The number of distinct candidates generated on the whole. 
+            @return
+        </member>
+        <member name="T:edu.asu.emit.algorithm.graph.VariableGraph">
+            The class defines a graph which can be changed constantly.
+             
+            @author yqi
+            
+            Regarding the above javadoc author statement it applies to the original Java code found here:
+            https://github.com/yan-qi/k-shortest-paths-java-version
+            Regarding the translation of that Java code to this .NET code, see the top of this source file for more information.
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.VariableGraph.#ctor">
+            Default constructor
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.VariableGraph.#ctor(System.String)">
+            Constructor 1
+            
+            @param dataFileName
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.VariableGraph.#ctor(edu.asu.emit.algorithm.graph.Graph)">
+            Constructor 2
+            
+            @param graph
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.VariableGraph.SetDelVertexIdList(System.Collections.Generic.IList{System.Int32})">
+            Set the set of vertices to be removed from the graph
+            
+            @param remVertexList
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.VariableGraph.SetDelEdgeHashcodeSet(System.Collections.Generic.IList{edu.asu.emit.algorithm.utils.Pair{System.Int32,System.Int32}})">
+            Set the set of edges to be removed from the graph
+            
+            @param _rem_edge_hashcode_set
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.VariableGraph.DeleteEdge(edu.asu.emit.algorithm.utils.Pair{System.Int32,System.Int32})">
+            Add an edge to the set of removed edges
+            
+            @param edge
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.VariableGraph.DeleteVertex(System.Int32)">
+            Add a vertex to the set of removed vertices
+            
+            @param vertexId
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.VariableGraph.GetEdgeWeight(edu.asu.emit.algorithm.graph.abstraction.BaseVertex,edu.asu.emit.algorithm.graph.abstraction.BaseVertex)">
+            Return the weight associated with the input edge.
+            
+            @param source
+            @param sink
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.VariableGraph.GetEdgeWeightOfGraph(edu.asu.emit.algorithm.graph.abstraction.BaseVertex,edu.asu.emit.algorithm.graph.abstraction.BaseVertex)">
+            Return the weight associated with the input edge.
+            
+            @param source
+            @param sink
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.VariableGraph.GetAdjacentVertices(edu.asu.emit.algorithm.graph.abstraction.BaseVertex)">
+            Return the set of fan-outs of the input vertex.
+            
+            @param vertex
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.VariableGraph.GetPrecedentVertices(edu.asu.emit.algorithm.graph.abstraction.BaseVertex)">
+            Get the set of vertices preceding the input vertex.
+            
+            @param vertex
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.VariableGraph.GetVertexList">
+            Get the list of vertices in the graph, except those removed.
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.VariableGraph.GetVertex(System.Int32)">
+            Get the vertex corresponding to the input 'id', if exist. 
+            
+            @param id
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.graph.VariableGraph.main(System.String[])">
+            @param args
+        </member>
+        <member name="T:edu.asu.emit.algorithm.graph.Vertex">
+            The class defines a vertex in the graph
+            
+            @author yqi
+            
+            Regarding the above javadoc author statement it applies to the original Java code found here:
+            https://github.com/yan-qi/k-shortest-paths-java-version
+            Regarding the translation of that Java code to this .NET code, see the top of this source file for more information.
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:edu.asu.emit.algorithm.utils.Pair`2" -->
+        <!-- Badly formed XML comment ignored for member "T:edu.asu.emit.algorithm.utils.QYPriorityQueue`1" -->
+        <member name="M:edu.asu.emit.algorithm.utils.QYPriorityQueue`1.#ctor">
+            Default constructor. 
+        </member>
+        <member name="M:edu.asu.emit.algorithm.utils.QYPriorityQueue`1.#ctor(System.Int32,System.Boolean)">
+            Constructor. 
+            @param pLimitSize
+        </member>
+        <member name="M:edu.asu.emit.algorithm.utils.QYPriorityQueue`1.BinLocatePos(System.Double,System.Boolean)">
+            Binary search is exploited to find the right position 
+            of the new element. 
+            @param weight
+            @return the position of the new element
+        </member>
+        <member name="M:edu.asu.emit.algorithm.utils.QYPriorityQueue`1.Add(`0)">
+            Add a new element in the queue. 
+            @param element
+        </member>
+        <member name="M:edu.asu.emit.algorithm.utils.QYPriorityQueue`1.Size">
+            It only reflects the size of the current results.
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.utils.QYPriorityQueue`1.Get(System.Int32)">
+            Get the i th element. 
+            @param i
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.utils.QYPriorityQueue`1.Poll">
+            Get the first element, and then remove it from the queue. 
+            @return
+        </member>
+        <member name="M:edu.asu.emit.algorithm.utils.QYPriorityQueue`1.IsEmpty">
+            Check if it's empty.
+            @return
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Adaptee.YanQi.EdgeYanQi">
+            The purpose of the class suffix "YanQi" is just to very clearly indicate (without having to look at the full name including the package name) 
+            that it originates from the project https://github.com/yan-qi/k-shortest-paths-java-version
+            The class is intended to be used among other "Edge" types from the 
+            project e.g. the interface "Edge" in the project currently named "Programmerare.ShortestPaths.Core"
+            @author Tomas Johansson
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Adaptee.YanQi.GraphPossibleToCreateProgrammatically">
+             The purpose of creating this class was to make it possible to create a Graph programmatically 
+             as an alternative to creating it from textfile data input.
+             The base class 'Graph' has a method 'importFromFile' and I did not want modify more of the existing code than needed. 
+             (for two reasons: to minimize risk of introducing bugs and to make it more likely that a future pull request will be accepted)
+            
+             When looking in that method, I could see it does three things:
+             	(well, at least kind of, since it depends on how you count 'things' but I think the code can at least be divided into three parts as below) 
+             1. invoke the method 'clear'
+             2. set the number of vertices (but also some more things at the same time, i.e. not just setting an instance variable)
+             3. add the edges from string lines with three items in each row, the two vertex names and the weight
+             
+             The method 'clear' was already public so it could have been used without subclassing.
+             However, the method used in step 3 above is named 'addEdge' and is protected.
+             To be able to invoke it (without changing its access level to public) I created this subclass.
+             There were a few lines of code involved in step 2 above, and instead of copying those
+             rows into this subclass, I extracted those lines of code into a new protected method 'setNumberOfVertices' used below. 
+             
+             @author Tomas Johansson
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Adaptee.YanQi.GraphPossibleToCreateProgrammatically.#ctor(System.Int32,System.Collections.Generic.IList{Programmerare.ShortestPaths.Adaptee.YanQi.EdgeYanQi})">
+            There is a requirement for the input graph. 
+            The ids of vertices must be consecutive.
+            The previous two sentences was copied from method {@link #importFromFile(String)} in the base class
+            which does basically the same thing as this constructor but it has dependency to input existing in a file. 
+            
+            @param numberOfVertices self descriptive name but note that they must be consecutive as mentioned above. 
+            @param linesWithEdgeNamesAndWeight a list of strings, and each such string must have three parts separated with a space, 
+            		the id for the start and end vertex for the edge, and the weight for the edge 
+        </member>
+    </members>
+</doc>
