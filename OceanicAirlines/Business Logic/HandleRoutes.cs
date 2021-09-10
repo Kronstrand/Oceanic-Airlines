@@ -20,19 +20,16 @@ namespace Oceanic_Airlines.Business_Logic
 {
 	public class HandleRoutes : IHandleRoutes
 	{
-        private OceanicAirlinesContext db; 
-
 		List<Vertex> vertices;
 		IList<Edge> edges;
         private List<OceanicAirlines.Models.City> cities;
         private Dictionary<String, Vertex> vortexSet;
 		List<ResultPathDTO> finalResultPaths;
+		private OceanicAirlinesContext db = new OceanicAirlinesContext();
+
 		public HandleRoutes()
 		{
-            if (db == null)
-            { 
-                db = new OceanicAirlinesContext();
-			}
+
 			vertices = new List<Vertex>();
 			edges = new List<Edge>();
 			finalResultPaths = new List<ResultPathDTO>();
@@ -40,12 +37,8 @@ namespace Oceanic_Airlines.Business_Logic
 
         private void SetupTheGraph()
         {
-            if (cities == null)
-            {
-                cities = db.Cities.ToList();
-            }
+            cities = db.Cities.ToList();
 			vortexSet = new Dictionary<string, Vertex>();
-
 
 			foreach (OceanicAirlines.Models.City city in cities)
             {
@@ -122,8 +115,8 @@ namespace Oceanic_Airlines.Business_Logic
 		public String PrepareKShortestPaths()
 		{
 			PathFinderFactory pathFinderFactory = new PathFinderFactoryYanQi();
-			setupTestData();
-			//SetupTheGraph();
+			//setupTestData();
+			SetupTheGraph();
 			Graph graph = CreateGraph(edges);
 
 			PathFinder pathFinder = pathFinderFactory.CreatePathFinder(graph);

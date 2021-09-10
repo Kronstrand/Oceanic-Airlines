@@ -10,7 +10,16 @@ namespace OceanicAirlines.Controllers
 {
     public class SearchRouteController : Controller
     {
+        OceanicAirlines.ViewModels.SearchRouteViewModel model;
         public ActionResult SearchRoute()
+        {
+            
+
+            model = new SearchRouteViewModel();
+            return View(model);
+        }
+
+        public ActionResult SubmitData()
         {
             HandleRoutes routes = new HandleRoutes();
             String resultPath = routes.PrepareKShortestPaths();
@@ -22,12 +31,6 @@ namespace OceanicAirlines.Controllers
                 ViewBag.Message += result.getMessageString();
             }
 
-            OceanicAirlines.ViewModels.SearchRouteViewModel model = new SearchRouteViewModel();
-            model.cities = routes.GetCitiesList();
-            if (model.cities == null)
-            {
-                return View();
-            }
             return View(model);
         }
     }

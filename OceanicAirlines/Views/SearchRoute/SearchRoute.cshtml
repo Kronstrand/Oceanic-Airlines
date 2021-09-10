@@ -9,7 +9,8 @@
 <div class="col-lg-12">
     <div class="col-lg-2"></div>
     <div class="col-lg-6 search-box-form">
-        <form>
+        @using (Html.BeginForm("SubmitData", "SearchRoute", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
             <div class="col-lg-6">
                 <label id="OriginCityLabel">From</label>
             </div>
@@ -19,7 +20,7 @@
             <br />
 
             <div class="col-lg-4" id="bloodhound">
-                @Html.TextBoxFor(model => model.OriginCity, new { @class = "form-control", @id = "OriginCity", @name= "OriginCity", @placeholder = "Search..." })
+                @Html.TextBoxFor(model => model.OriginCity, new { @class = "form-control", @id = "OriginCity", @name = "OriginCity", @placeholder = "Search..." })
             </div>
             <div class="col-lg-6" id="bloodhound2">
                 @Html.TextBoxFor(model => model.DestinationCity, new { @class = "form-control", @id = "DestinationCity", @name = "DestinationCity", @placeholder = "Search..." })
@@ -39,7 +40,7 @@
                 <label id="ParcelTypeLabel">Parcel Type</label>
                 <br />
                 @Html.DropDownListFor(m => m.ParcelTypeEnumValue,
-                    new SelectList(Enum.GetValues(typeof(ParcelType)), 1, "Value"), new { id = "ParcelTypeSelect" })
+                     new SelectList(Enum.GetValues(typeof(ParcelType)), 1, "Value"), new { id = "ParcelTypeSelect" })
 
             </div>
             <div class="col-lg-6">
@@ -58,13 +59,9 @@
 
                 <br />
             </div>
-            <button type="submit" class="btn submit-button">SEARCH</button>
-        </form>
-    </div>
+            <button type="submit" class="btn submit-button" onclick="location.href='@Url.Action("submitData", "SearchRouteController")'">SEARCH</button>
+        }
+        </div>
     <div class="col-lg-2"></div>
 </div>
 <h3>@ViewBag.Message</h3>
-
-
-<p>Use this area to provide additional information.</p>
-<h3>@ViewBag.FinalResults</h3>

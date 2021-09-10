@@ -234,6 +234,7 @@
     <Content Include="Views\Route\Details.cshtml" />
     <Content Include="Views\Route\Edit.cshtml" />
     <Content Include="Views\Route\Index.cshtml" />
+    <Content Include="Views\SearchRoute\SubmitData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
