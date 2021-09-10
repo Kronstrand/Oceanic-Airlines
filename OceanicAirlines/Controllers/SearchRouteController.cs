@@ -19,10 +19,10 @@ namespace OceanicAirlines.Controllers
             return View(model);
         }
 
-        public ActionResult SubmitData()
+        public ActionResult SubmitData(string originCity, string destinationCity)
         {
             HandleRoutes routes = new HandleRoutes();
-            String resultPath = routes.PrepareKShortestPaths();
+            String resultPath = routes.PrepareKShortestPaths(originCity, destinationCity);
 
             List<ResultPathDTO> resultPathDTOs = routes.GetResultPathDTOs();
             ViewBag.Message = "";

@@ -110,7 +110,7 @@ namespace OceanicAirlines.Business_Logic
 			edges.Add(CreateEdge(e, i, CreateWeight(hoursPerPath)));
 		}
 
-		public String PrepareKShortestPaths()
+		public String PrepareKShortestPaths(string originCity, string destinationCity)
 		{
 			PathFinderFactory pathFinderFactory = new PathFinderFactoryYanQi();
 			//setupTestData();
@@ -119,7 +119,7 @@ namespace OceanicAirlines.Business_Logic
 
 			PathFinder pathFinder = pathFinderFactory.CreatePathFinder(graph);
 
-			IList<Path> shortestPathsFromAtoD = pathFinder.FindShortestPaths(vertices[0], vertices[4], 3);
+			IList<Path> shortestPathsFromAtoD = pathFinder.FindShortestPaths(vortexSet[originCity], vortexSet[destinationCity], 3);
 
 			String resultPaths = "", currentPath;
 
@@ -151,8 +151,6 @@ namespace OceanicAirlines.Business_Logic
 }
 public class ResultPathDTO
 {
-	string originVertexId;
-	string destinationVertexId;
 	public TimeSpan totalCostInHours;
 	public double totalCostInDollars = 0;
 	List<SinglePathDTO> singlePaths;

@@ -12,7 +12,7 @@ namespace OceanicAirlines.Api
         public IHttpActionResult Post(RouteSearchDTO search)
         {
             HandleRoutes routes = new HandleRoutes();
-            String resultPath = routes.PrepareKShortestPaths();
+            String resultPath = routes.PrepareKShortestPaths(search.Origin, search.Destination);
 
             List<ResultPathDTO> resultPathDTOs = routes.GetResultPathDTOs();
 

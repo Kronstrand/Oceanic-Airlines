@@ -8,7 +8,7 @@ namespace OceanicAirlines.Interfaces
 {
     public interface IHandleRoutes
     {
-        string PrepareKShortestPaths();
+        string PrepareKShortestPaths(string originCity, string destinationCity);
     }
 
 }
