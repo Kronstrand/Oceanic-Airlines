@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Web.Http;
-using Oceanic_Airlines.Business_Logic;
-using Oceanic_Airlines.DTO;
+using OceanicAirlines.Business_Logic;
+using OceanicAirlines.DTO;
 
-namespace Oceanic_Airlines.Api
+namespace OceanicAirlines.Api
 {
     [Route("api/GetRouteDetails")]
     public class OceanicAirlinesApiController : ApiController

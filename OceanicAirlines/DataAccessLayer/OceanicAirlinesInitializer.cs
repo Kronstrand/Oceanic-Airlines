@@ -19,36 +19,6 @@ namespace OceanicAirlines.DataAccessLayer
             AddTransportationMethods(context, "C:\\Users\\emid\\OneDrive - Netcompany\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\TransportationMethod.txt");
             AddRoutes(context, "C:\\Users\\emid\\OneDrive - Netcompany\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\Routes.txt");
             AddShipments(context, "C:\\Users\\emid\\OneDrive - Netcompany\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\Shipments.txt");
-            AddUsers(context, "C:\\Users\\emid\\OneDrive - Netcompany\\Desktop\\Oceanic-Airlines\\OceanicAirlines\\DataSetup\\User.txt");
-        }
-
-        private void AddUsers(OceanicAirlinesContext context, string path)
-        {
-            int counter = 0;
-            string line;
-
-            // Read the file and display it line by line.  
-            var file = GetFile(path);
-            while ((line = file.ReadLine()) != null)
-            {
-                var splits = line.Split(',').ToList();
-                if (splits.Count != 3)
-                {
-                    continue;
-                }
-                var user = new User
-                {
-                    UserID = Guid.NewGuid(),
-                    Name = splits[0],
-                    Email = splits[1],
-                    Password = splits[2],
-                };
-                context.Users.Add(user);
-                counter++;
-            }
-            file.Close();
-            context.SaveChanges();
-            Console.WriteLine("There were {0} lines.", counter);
         }
 
         private void AddTransportationMethods(OceanicAirlinesContext context, string path)

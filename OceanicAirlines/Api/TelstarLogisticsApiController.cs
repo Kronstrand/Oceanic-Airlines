@@ -3,30 +3,28 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Newtonsoft.Json;
-using Oceanic_Airlines.DTO;
+using OceanicAirlines.DTO;
+using OceanicAirlines.Api;
 
-namespace Oceanic_Airlines.Api
+namespace OceanicAirlines.Api
 {
     [Route("api/test/tl/GetRouteDetails")]
     public class TelstarLogisticsApiController : ApiController
     {
 
-        static string _address = "http://wa-tl-dk1.azurewebsites.net/api/GetRouteDetails";
-        //static string _address = "https://localhost:44375//api/GetRouteDetails";
-        
-        public async void Post(RouteSearchDTO search)
+        static string _address = "http://wa-tl-dk1.azurewebsites.net//delivery/getRouteDetails";
+
+        public IHttpActionResult Post(RouteSearchDTO search)
         {
-            var result = await GetExternalResponse(search);
+            //search = new RouteSearchDTO {Origin = "Hvalbugten", Destination = "Kapstaden", ParcelType = 6, Depth = 1.1f, Height = 1.1f, Width = 1.1f, Weight = 2, Month = 6};
+            var result = GetExternalResponse(search);
+            return Json(result);
         }
 
-        private async Task<string> GetExternalResponse(RouteSearchDTO search)
+        public RouteDetailsDTO GetExternalResponse(RouteSearchDTO search)
         {
-            var client = new HttpClient();
-            string json = await Task.Run(() => JsonConvert.SerializeObject(search));
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync(_address, null);
-            var responseContent = await response.Content.ReadAsStringAsync();
-            return responseContent;
+            var apiAcces = new AccesExternalApi();
+            return apiAcces.GetExternalResponse(_address, search);
         }
     }
 }
