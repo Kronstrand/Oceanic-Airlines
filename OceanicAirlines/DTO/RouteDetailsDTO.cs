@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Oceanic_Airlines.DTO
+namespace OceanicAirlines.DTO
 {
     public class RouteDetailsDTO
     {

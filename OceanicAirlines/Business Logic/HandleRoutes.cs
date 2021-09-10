@@ -1,4 +1,4 @@
-﻿using Oceanic_Airlines.Interfaces;
+﻿using OceanicAirlines.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +10,10 @@ using static Programmerare.ShortestPaths.Core.Impl.VertexImpl;  // CreateVertex
 using static Programmerare.ShortestPaths.Core.Impl.WeightImpl;  // CreateWeight
 using static Programmerare.ShortestPaths.Core.Impl.EdgeImpl;    // CreateEdge
 using static Programmerare.ShortestPaths.Core.Impl.GraphImpl;   // CreateGraph
-using System;
 using System.Text;
-using System.Collections.Generic;
-using Oceanic_Airlines.Business_Logic;
+using OceanicAirlines.Business_Logic;
 
-namespace Oceanic_Airlines.Business_Logic
+namespace OceanicAirlines.Business_Logic
 {
 	public class HandleRoutes : IHandleRoutes
 	{

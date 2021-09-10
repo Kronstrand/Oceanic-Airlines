@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
-using Oceanic_Airlines.DTO;
+using OceanicAirlines.DTO;
 
-namespace Oceanic_Airlines.Api
+namespace OceanicAirlines.Api
 {
     [Route("api/GetRouteDetails")]
     public class OceanicAirlinesApiController : ApiController

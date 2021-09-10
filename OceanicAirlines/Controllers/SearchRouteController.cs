@@ -1,4 +1,4 @@
-﻿using Oceanic_Airlines.Business_Logic;
+﻿using OceanicAirlines.Business_Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;

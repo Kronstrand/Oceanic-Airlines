@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Programmerare.ShortestPaths.Adapter.Bsmock</name>
+    </assembly>
+    <members>
+        <member name="T:Programmerare.ShortestPaths.Adapter.Bsmock.Generics.PathFinderBsmockGenerics`4">
+            <summary>
+            "Adapter" implementation of the "Target" interface 
+            https://en.wikipedia.org/wiki/Adapter_pattern
+            </summary>
+            <typeparam name="P">Path</typeparam>
+            <typeparam name="E">Edge</typeparam>
+            <typeparam name="V">Vertex</typeparam>
+            <typeparam name="W">Weight</typeparam>
+        </member>
+    </members>
+</doc>

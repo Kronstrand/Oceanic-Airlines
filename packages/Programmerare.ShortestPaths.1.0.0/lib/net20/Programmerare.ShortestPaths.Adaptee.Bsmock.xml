@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Programmerare.ShortestPaths.Adaptee.Bsmock</name>
+    </assembly>
+    <members>
+        <member name="T:edu.ufl.cise.bsmock.graph.Edge">
+             The Edge class implements standard properties and methods for a weighted edge in a directed graph.
+            
+             Created by Brandon Smock on 6/19/15.
+             The above statement applies to the original Java code found here:
+             https://github.com/bsmock/k-shortest-paths
+             Regarding the translation of that Java code to this .NET code, see the top of this source file for more information.
+        </member>
+        <member name="T:edu.ufl.cise.bsmock.graph.Graph">
+             The Graph class implements a weighted, directed graph using an adjacency list representation.
+            
+             Created by brandonsmock on 6/1/15.
+             The above statement applies to the original Java code found here:
+             https://github.com/bsmock/k-shortest-paths
+             Regarding the translation of that Java code to this .NET code, see the top of this source file for more information.
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:edu.ufl.cise.bsmock.graph.ksp.KSPAlgorithm" -->
+        <!-- Badly formed XML comment ignored for member "T:edu.ufl.cise.bsmock.graph.ksp.Yen" -->
+        <member name="M:edu.ufl.cise.bsmock.graph.ksp.Yen.Ksp(edu.ufl.cise.bsmock.graph.Graph,System.String,System.String,System.Int32)">
+             Computes the K shortest paths in a graph from node s to node t using Yen's algorithm
+            
+             @param graph         the graph on which to compute the K shortest paths from s to t
+             @param sourceLabel   the starting node for all of the paths
+             @param targetLabel   the ending node for all of the paths
+             @param K             the number of shortest paths to compute
+             @return              a list of the K shortest paths from s to t, ordered from shortest to longest
+        </member>
+        <member name="M:edu.ufl.cise.bsmock.graph.ksp.Yen.Ksp_v2(edu.ufl.cise.bsmock.graph.Graph,System.String,System.String,System.Int32)">
+             An in-progress alternative implementation of Yen's algorithm.
+            
+             @param graph         the graph on which to compute the K shortest paths from s to t
+             @param sourceLabel   the starting node for all of the paths
+             @param targetLabel   the ending node for all of the paths
+             @param K             the number of shortest paths to compute
+             @return              a list of the K shortest paths from s to t, ordered from shortest to longest
+        </member>
+        <member name="T:edu.ufl.cise.bsmock.graph.Node">
+             The Node class implements a node in a directed graph keyed on a label of type String, with adjacency lists for
+             representing edges.
+            
+             Created by brandonsmock on 5/31/15.
+             The above statement applies to the original Java code found here:
+             https://github.com/bsmock/k-shortest-paths
+             Regarding the translation of that Java code to this .NET code, see the top of this source file for more information.
+        </member>
+        <member name="T:edu.ufl.cise.bsmock.graph.util.DijkstraNode">
+            Created by brandonsmock on 6/6/15.
+            The above statement applies to the original Java code found here:
+            https://github.com/bsmock/k-shortest-paths
+            Regarding the translation of that Java code to this .NET code, see the top of this source file for more information.
+        </member>
+        <member name="T:edu.ufl.cise.bsmock.graph.util.Path">
+             The Path class implements a path in a weighted, directed graph as a sequence of Edges.
+            
+             Created by Brandon Smock on 6/18/15.
+             The above statement applies to the original Java code found here:
+             https://github.com/bsmock/k-shortest-paths
+             Regarding the translation of that Java code to this .NET code, see the top of this source file for more information.
+        </member>
+        <member name="T:edu.ufl.cise.bsmock.graph.util.ShortestPathTree">
+            Created by brandonsmock on 6/8/15.
+            The above statement applies to the original Java code found here:
+            https://github.com/bsmock/k-shortest-paths
+            Regarding the translation of that Java code to this .NET code, see the top of this source file for more information.
+        </member>
+        <member name="T:edu.ufl.cise.bsmock.graph.WeightedEdge">
+             The WeightedEdge class implements standard properties and methods for a weighted edge in a directed graph.
+            
+             Created by Brandon Smock on 6/6/15.
+             The above statement applies to the original Java code found here:
+             https://github.com/bsmock/k-shortest-paths
+             Regarding the translation of that Java code to this .NET code, see the top of this source file for more information.
+        </member>
+    </members>
+</doc>

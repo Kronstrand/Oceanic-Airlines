@@ -1,0 +1,538 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Programmerare.ShortestPaths.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Programmerare.ShortestPaths.Core.Api.Edge">
+            <summary>
+            See <see cref="T:Programmerare.ShortestPaths.Core.Api.Generics.EdgeGenerics`2"/>
+            </summary>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Api.Generics.EdgeGenerics`2">
+            <summary>
+            An Edge represents a path between two vertices,  the start Vertex and the end Vertex,  with an associated weight. 
+            The edge path is directed (i.e. with direction) and direct (i.e. without roundabout through other vertices in between).
+            </summary>
+            <typeparam name="V">Vertex</typeparam>
+            <typeparam name="W">Weight</typeparam>
+        </member>
+        <member name="P:Programmerare.ShortestPaths.Core.Api.Generics.EdgeGenerics`2.EdgeId">
+            <summary>
+            an id which must be unique within a Graph, i.e. a Graph should not have more than one Edge with the same id. 
+            One possible way of implementing it is to return a concatenation of the id's for the start vertex and the end vertex, with a separator between (e.g. an underscore).
+            Such an implementation will make it unique since each vertex id should also be unique within a graph. 
+            </summary>
+        </member>
+        <member name="P:Programmerare.ShortestPaths.Core.Api.Generics.EdgeGenerics`2.StartVertex">
+            <summary>
+            the Vertex where the directed Edge starts
+            </summary>
+        </member>
+        <member name="P:Programmerare.ShortestPaths.Core.Api.Generics.EdgeGenerics`2.EndVertex">
+            <summary>
+            the Vertex where the directed Edge ends
+            </summary>
+        </member>
+        <member name="P:Programmerare.ShortestPaths.Core.Api.Generics.EdgeGenerics`2.EdgeWeight">
+            <summary>
+            the Weight for the edge, i.e. some kind of 'cost' (e.g. time or distance) for going from the start Vertex to the end Vertex. 
+            </summary>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Api.Generics.GraphGenerics`3">
+            <summary>
+            A Graph represents a collection of Edge instances.
+            </summary>
+            <typeparam name="E">Edge</typeparam>
+            <typeparam name="V">Vertex</typeparam>
+            <typeparam name="W">Weight</typeparam>
+        </member>
+        <member name="P:Programmerare.ShortestPaths.Core.Api.Generics.GraphGenerics`3.Edges">
+            <summary>
+            all edges in the graph
+            </summary>
+        </member>
+        <member name="P:Programmerare.ShortestPaths.Core.Api.Generics.GraphGenerics`3.Vertices">
+            <summary>
+            all vertices in the graph. 
+            The vertices can be derived from the edges, i.e. the method might be implemented as iterating the edges 
+            as a way to create a list of all vertices.
+            However, for performance reasons should it not be done every time the method is invoked, but preferably implemented with lazy loading.  
+            </summary>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Api.Generics.GraphGenerics`3.ContainsVertex(`1)">
+            <param name="vertex">an instance of a Vertex. When the method is implemented, it should use the Vertex id for the comparison, 
+                i.e. the implementation should NOT use object equality when determining whether the Vertex is part of the Graph or not.
+            </param>
+            <returns>true if there is a Vertex in the graph with the same id as the Vertex parameter.</returns>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Api.Generics.GraphGenerics`3.ContainsEdge(`0)">
+            <param name="edge">edge an instance of an Edge. When the method is implemented, it should use the Edge id for the comparison,  
+                i.e. the implementation should NOT use object equality when determining whether the Edge is part of the Graph or not.
+            </param>
+            <returns>true if there is an Edge in the graph with the same id as the Edge parameter.</returns>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Api.Generics.PathFinderFactoryGenerics`5">
+            TODO maybe: Implement something like this for instantiating: XPathFactory xPathfactory = XPathFactory.newInstance();
+             Maybe it should use different strategies for choosing instance.
+            	If multiple implementations are available, then determine in some preferred order, and maybe be able to define it 
+            	in a config file or system property... 
+            <summary>
+            Used for creating an instance of PathFinder. 
+            The instantiated PathFinder will be an Adapter implementation of the PathFinder, i.e. will use a third-part library for finding the shortest path. 
+            </summary>
+            <typeparam name="F">pathFinder</typeparam>
+            <typeparam name="P">Path</typeparam>
+            <typeparam name="E">Edge</typeparam>
+            <typeparam name="V">Vertex</typeparam>
+            <typeparam name="W">Weight</typeparam>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Api.Generics.PathFinderFactoryGenerics`5.CreatePathFinder(Programmerare.ShortestPaths.Core.Api.Generics.GraphGenerics{`2,`3,`4})">
+            <param name="graph">the Graph which the implementation should forward to the PathFinder implementations, which must keep a reference to it,
+                since the PathFinder find method will not receive the Graph as parameter.
+            </param>
+            <returns>an Adapter implementation of the PathFinder, which will use some "Adaptee" (third-part library) for finding shortest paths.</returns>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Api.Generics.PathFinderFactoryGenerics`5.CreatePathFinder(System.Collections.Generic.IList{`2},Programmerare.ShortestPaths.Core.Validation.GraphEdgesValidationDesired)">
+            <summary>
+            Convenience method with a list of Edge instances parameter instead of a Graph parameter.
+            It should be implemented as creating a Graph with the list of edges, and then invoke the overloaded method with Graph as parameter.
+            </summary>
+            <param name="edges">list of Edge instances to be used for creating a Graph</param>
+            <param name="graphEdgesValidationDesired">see the documentation for the overloaded method</param>
+            <returns>see the documentation for the overloaded method</returns>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Api.Generics.PathFinderGenerics`4">
+            <summary>
+            The PathFinder interface provides a method for finding the shortest path between two Vertex instances in a Graph.
+            The Graph is NOT provided as a parameter to the find method which means that the implementations must aggregate the Graph. 
+            The PathFinder interface corresponds to the the "Target" interface in the Adapter Design Pattern.
+            The different "Adapter" implementations of this "Target" interface will use different third-part libraries
+            for finding the shortest paths, i.e. those libraries play the role of the "Adaptee" in the Adapter Pattern (see URL below).
+            https://en.wikipedia.org/wiki/Adapter_pattern
+            </summary>
+            <typeparam name="P">Path</typeparam>
+            <typeparam name="E">Edge</typeparam>
+            <typeparam name="V">Vertex</typeparam>
+            <typeparam name="W">Weight</typeparam>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Api.Generics.PathFinderGenerics`4.FindShortestPaths(`2,`2,System.Int32)">
+            <summary>
+            Finds the shortest paths from the start Vertex to the end Vertex.
+            </summary>
+            <param name="startVertex">the first Vertex of the searched Path.</param>
+            <param name="endVertex">the last Vertex of the searched Path.</param>
+            <param name="maxNumberOfPaths">the max number of paths the method should return.</param>
+            <returns>
+            a list of Path instances, where each Path represents a path from the start vertex to the end vertex.
+            The returned paths are sorted by total weight in increasing order, i.e. the first path in the list has the very lowest total weight.
+            Each returned Path contains a list of Edge instances. The start Vertex for the first Edge, and the end Vertex for the last Edge, 
+            should be the same for each returned paths, i.e. those should be the same start vertex and end vertex as were used as method input parameters.     
+            </returns>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Api.Generics.PathGenerics`3">
+            <summary>
+            A path represents a connection between two Vertices, the start Vertex in the first Edge of the edge List, 
+            and the end Vertex in the last Edge of the edge List. 
+            </summary>
+            <typeparam name="E">Edge</typeparam>
+            <typeparam name="V">Vertex</typeparam>
+            <typeparam name="W">Weight</typeparam>
+        </member>
+        <member name="P:Programmerare.ShortestPaths.Core.Api.Generics.PathGenerics`3.EdgesForPath">
+            <summary>
+            a list of Edge instances which together represent the Path.
+            For each Edge in the list, the start Vertex should the same Vertex as the end Vertex for the previous Edge in the List.
+            (but of course not for the first Edge in the List, since it has not previous Edge)
+            </summary>
+        </member>
+        <member name="P:Programmerare.ShortestPaths.Core.Api.Generics.PathGenerics`3.TotalWeightForPath">
+            <summary>
+            the sum of all the weights in the Weight instances aggregated by all the Edge instances in the Path. 
+            Obviously, the client code could calculate the sum through the method returning a List of Edge instance, but 
+            it is provided here as a convenience method in the interface.
+            </summary>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Api.Graph">
+            <summary>
+            See <see cref="T:Programmerare.ShortestPaths.Core.Api.Generics.GraphGenerics`3"/>
+            </summary>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Api.Path">
+            <summary>
+            See <see cref="T:Programmerare.ShortestPaths.Core.Api.Generics.PathGenerics`3"/>
+            </summary>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Api.PathFinder">
+            <summary>
+            See <see cref="T:Programmerare.ShortestPaths.Core.Api.Generics.PathFinderGenerics`4"/>
+            </summary>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Api.PathFinderFactory">
+            <summary>
+            See <see cref="T:Programmerare.ShortestPaths.Core.Api.Generics.PathFinderFactoryGenerics`5"/>
+            </summary>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Api.StringRenderable">
+            <summary>
+            Used for trying to enforce that implementations of core types (Vertex, Edge, Weight)
+            will output useful string, which is used in validation methods in class <see cref="T:Programmerare.ShortestPaths.Core.Validation.GraphEdgesValidator`4"/>.
+            Another reason for introducing the interface was to the avoid ugliness of otherwise letting a method 
+            receive type "Object" as a parameter when you want to use "toString" when the actual objects
+            are one of Vertex, Edge or Weight, but those three types did not have any common base type before this interface was introduced.
+            </summary>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Api.Vertex">
+            <summary>
+            A Vertex represents some point in the Graph. 
+            One instance may be part of many edges.
+            One Vertex can be start vertex for many edges, and can also be end vertex for many edges.  
+            </summary>
+        </member>
+        <member name="P:Programmerare.ShortestPaths.Core.Api.Vertex.VertexId">
+            <summary>
+            an id which must be unique within a Graph, i.e. a Graph should not have more than one Vertex with the same id.
+            </summary>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Api.Weight">
+            <summary>
+            A Weight represents some kind of cost for an Edge, i.e. a cost for going from the start Vertex to the end Vertex of the Edge.
+            When trying to find the shortest paths between two vertices in a Graph, it is the sum of the weights that are minimized.
+            In real world scenarios, the cost can be for example distance or time (in some unit) for going between two places (vertices).
+            </summary>
+        </member>
+        <member name="P:Programmerare.ShortestPaths.Core.Api.Weight.WeightValue">
+            	     * TODO maybe: Improve documentation by 
+                     * motivating why not a double is simply used everywhere 
+                     * instead of defining a trivial interface ... 
+                     * ( and then maybe mention DDD and the book Prefactoring ...) 
+            <summary>
+            the actual numerical value for the weight.
+            </summary>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Api.Weight.Create(System.Double)">
+            <summary>
+            Factory method not intended to be used by client code, but must of course be implemented if 
+            you create your own implementation instead of the default implementation.
+            The purpose is that it will be used by PathFinderBase, for creating the total weight with the same implementing class as the weights in the edges. 
+            Instead of forcing client code to pass a Weight factory class trough a factory creating the PathFinder,
+            this factory has been placed here, and then any weight (e.g. the first found) can be used by assuming all edges have the same weight implementation.
+            When the create method is used, it might be considered as a variant of or at least similar to the design pattern Prototype, 
+            though not cloning itself with the same value but the value is instead a parameter for the method.
+            </summary>
+            <param name="value">the actual numerical value for the weight</param>
+            <returns>
+            an instance of Weight which should be of the same class as the implementing class.
+                For example: if "class A implements Weight" then class A should implement the method as something like "return new A(value)"
+            </returns>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Impl.Generics.EdgeGenericsImpl`2.CreateEdgeIdValue(System.String,System.String)">
+            <summary>
+            Creates an edge id by a concatenation of the two vertices and with a separator between those.
+            </summary>
+            <param name="startVertexId">the id for the vertex at the start of an edge</param>
+            <param name="endVertexId">the id for the vertex at the end of an edge</param>
+            <returns>the id to be used for the edge</returns>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Impl.Generics.EdgeMapper`3">
+            <summary>
+            Edge is an interface which the implementations will not know of.
+            Instances are passed as parameter into a construction of an implementation specific graph
+            which will return its own kind of edges.
+            Then those edges will be converted back to the common Edge interface, but in such case 
+            it will be a new instance which may not be desirable if the instances are not
+            the default implementations provided but this project, but they may be classes with more data methods,
+            and therefore it is desirable to map them back to the original instances, which is the purpose of this class.
+            </summary>
+            <typeparam name="E">Edge</typeparam>
+            <typeparam name="V">Vertex</typeparam>
+            <typeparam name="W">Weight</typeparam>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Impl.Generics.EdgeMapper`3.CreateEdgeMapper``3(System.Collections.Generic.IList{``0})">
+            <summary>
+            Precondition: the edges must already be validated. Use GraphEdgesValidator before createEdgeMapper.
+            </summary>
+            <typeparam name="E"></typeparam>
+            <typeparam name="V"></typeparam>
+            <typeparam name="W"></typeparam>
+            <param name="edges">a list of edges to be used for constructing a graph. Note that they are assumed to be validated as a precondition</param>
+            <returns></returns>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Impl.Generics.GraphGenericsImpl`3.CreateGraphGenerics``3(System.Collections.Generic.IList{``0})">
+            <summary>
+            Creates a graph instance, but will validate the edges and throw an exception if validation fails.
+            If validation is not desired, then use the overloaded method.
+            </summary>
+            <typeparam name="E">Edge</typeparam>
+            <typeparam name="V">Vertex</typeparam>
+            <typeparam name="W">Weight</typeparam>
+            <param name="edges">list of edges</param>
+            <returns>an instance implementing the interface GraphGenerics</returns>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Impl.Generics.PathFinderBase`4.#ctor(Programmerare.ShortestPaths.Core.Api.Generics.GraphGenerics{`1,`2,`3},Programmerare.ShortestPaths.Core.PathFactories.PathFactory{`0,`1,`2,`3})">
+            <summary>
+            
+            </summary>
+            <param name="graph">an implementation of the interface GraphGenerics</param>
+            <param name="pathFactory">an implementation of the interface PathFactory, if null then a default instance will be created</param>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Impl.Generics.PathFinderBase`4.FindShortestPaths(`2,`2,System.Int32)">
+            <summary>
+            non-virtual method to enforce the validation, 
+            and then forward to the hook method for the implementations
+            </summary>
+            <param name="startVertex"></param>
+            <param name="endVertex"></param>
+            <param name="maxNumberOfPaths"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Impl.Generics.PathFinderBase`4.ThrowExceptionBecauseVertexNotIncludedInGraph(System.String,`2)">
+            <param name="startOrEndmessagePrefix">intended to be one of the strings "start" or "end"</param>
+            <param name="vertex">Vertex</param>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Impl.Generics.PathFinderFactoryGenericsBase`5.CreatePathFinder(System.Collections.Generic.IList{`2},Programmerare.ShortestPaths.Core.Validation.GraphEdgesValidationDesired)">
+            <param name="edges">list of edges</param>
+            <param name="graphEdgesValidationDesired">should be NO (for performance reason) if validation has already been done</param>
+            <returns>an instance of a PathFinderGenerics implementation</returns>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Impl.Generics.PathGenericsImpl`3.CreatePathGenerics``3(``2,System.Collections.Generic.IList{``0},System.Boolean,System.Boolean)">
+            <typeparam name="E">Edge</typeparam>
+            <typeparam name="V">Vertex</typeparam>
+            <typeparam name="W">Weight</typeparam>
+            <param name="totalWeight">total weight</param>
+            <param name="edges">list of edges</param>
+            <param name="shouldThrowExceptionIfTotalWeightIsMismatching">flag for deciding if exception is desired if there is a mismatch in the total weight (which is redundant available in a convenience method but also summable from the list of edges and therefore might mismatch) </param>
+            <param name="shouldThrowExceptionIfAnyMismatchingVertex">flag for deciding if exception is desired if there is a mismatch in the vertices of the path edges (i.e. if not the end vertex is the same as the start vertex for the next edge)</param>
+            <returns>an instance of PathGenericsImpl</returns>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Impl.GraphImpl.CreateGraph(System.Collections.Generic.IList{Programmerare.ShortestPaths.Core.Api.Edge})">
+            <summary>
+            Creates a graph instance, but will validate the edges and throw an exception if validation fails.
+            If validation is not desired, then use the overloaded method.
+            </summary>
+            <param name="edges">list of all the edges for the graph</param>
+            <returns>an instance implementing the Graph interface</returns>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Impl.GraphImpl.CreateGraph(System.Collections.Generic.IList{Programmerare.ShortestPaths.Core.Api.Edge},Programmerare.ShortestPaths.Core.Validation.GraphEdgesValidationDesired)">
+            <param name="edges">list of all the edges for the graph</param>
+            <param name="graphEdgesValidationDesired">enum specifying whether or not validation is desired</param>
+            <returns>an instance implementing the Graph interface</returns>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Parsers.EdgeParser`3">
+            <summary>
+            See comments at the two essential methods in this class, 
+            i.e. the methods which convert between String and Edge.
+            </summary>
+            <typeparam name="E">Edge</typeparam>
+            <typeparam name="V">Vertex</typeparam>
+            <typeparam name="W">Weight</typeparam>
+        </member>
+        <member name="F:Programmerare.ShortestPaths.Core.Parsers.EdgeParser`3.separatorBetweenEdgesAndWeightWhenSplitting">
+            <summary>
+            When splitting strings, a regular expression can be used e.g. "\\s++" for matching one or more white space characters
+            while at the creation you need to be precise e.g. create a string with exactly one space.
+            However, these two should be compatible in the sense that the string used for creating should be possible 
+            to parse back for the splitting string (which is the case with the example with a space for creation
+            and the above mention regular expression for splitting.
+            The things splitted/created with these strings are the separators in a string like this:
+            "X Y 12.34" (start vertex id + separator + end vertex id + separator + weight)
+            </summary>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Parsers.EdgeParser`3.CreateEdgeParser(Programmerare.ShortestPaths.Core.Parsers.EdgeFactory{`0,`1,`2})">
+            <param name="edgeFactory">factory object used for creating Edge instances</param>
+            <returns>an instance of EdgeParser </returns>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Parsers.EdgeParser`3.CreateEdgeParserGenerics``3">
+            <summary>
+            Convenience method.
+            </summary>
+            <typeparam name="E">Edge</typeparam>
+            <typeparam name="V">Vertex</typeparam>
+            <typeparam name="W">Weight</typeparam>
+            <returns>an instance of EdgeParser constructed with a generics version of the edgeFactory </returns>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Parsers.EdgeParser`3.CreateEdgeParserDefault">
+            <summary>
+            Convenience method.
+            </summary>
+            <returns>an instance of EdgeParser constructed with a simple/standard version of the edgeFactory </returns>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Parsers.EdgeParser`3.FromStringToEdge(System.String)">
+            <summary>
+            Typical (intended) usage of the method:
+            Read input line by line from a file, and each line represents an Edge, which then can be parsed with this method.
+            </summary>
+            <param name="stringRepresentationOfEdge">
+            format: "startVertexId [SPACE] endVertexId [SPACE] weight", 
+            for example "X Y 12.34" for an edge from vertex X to vertex Y with 12.34 as the weight 
+            </param>
+            <returns>an Edge</returns>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Parsers.EdgeParser`3.FromEdgeToString(`0)">
+            <summary>
+            An example usage of this method can be to generate )e.g. randomly) lots of Edges for a Graph, to be used in testing.
+            Then we cab convert the edges to string format with this method and write them to a file, 
+            and then create test reading from the file and recreating the edges with a corresponding method in this class
+            which converts in the other direction i.e. from String to Edge.
+            The reason for doing these things is that you want use regression testing with repeatable deterministic assertions,
+            which you will not get if you randomly generate new graphs every time.
+            Regarding how to produce assertions for a randomly generated graph written to a file,
+            one method is to use the assertions with different implementations, and if three or more independent implementations 
+            produce the same result, then it is reasonable to assume that the result is correct, and those expected 
+            assertions might also be generated to a file, rather than every time only being able to assert 
+            that different implementations produce the same result.
+            </summary>
+            <param name="edge">an Edge</param>
+            <returns>a string representation of the edge 
+            for example  "A B 3.7" for an edge from vertex A to B with weight 3.7</returns>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Parsers.EdgeParser`3.FromMultiLinedStringToListOfEdges(System.String)">
+            <param name="multiLinedString">
+            a string including linebreaks where each line defines an edge with vertices and weight. 
+            A string like this is intended to be surrounded by xml tags 
+            in xml files but the content will then use this method.
+                A B 5
+                A C 6
+                B C 7
+                B D 8
+                C D 9    
+            </param>
+            <returns>a list of edges</returns>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Parsers.PathParser`4">
+            TODO: write more/better documentation ...
+            <summary>
+            String representation of the "List{Path{Edge}}" i.e. the same type returned from the following method: 
+            List{Path{Edge}} shortestPaths = pathFinder.findShortestPaths(startVertex, endVertex, numberOfPathsToFind);
+            The intended purpose is to define strings within xml files with the expected result
+            Each line in a string is first the total weight and then the sequence of vertices.
+            Example:  "13 A B D"
+            The simple representation (without weight informatin) is the reason why the list of edges is also needed,
+            i.e. to find the weights.
+            </summary>
+            <typeparam name="P">Path</typeparam>
+            <typeparam name="E">Edge</typeparam>
+            <typeparam name="V">Vertex</typeparam>
+            <typeparam name="W">Weight</typeparam>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Parsers.PathParser`4.#ctor(Programmerare.ShortestPaths.Core.PathFactories.PathFactory{`0,`1,`2,`3},System.Collections.Generic.IList{`1})">
+            <param name="pathFactory">
+            used for creating an instance of Path{E, V, W}.
+            See <see cref="!:PathFactory"/>
+            </param>
+            <param name="edgesUsedForFindingTheWeightsBetweenVerticesInPath"></param>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Parsers.PathParser`4.FromStringToPath(System.String)">
+            <param name="pathString">
+            First the total weight and then the sequence of vertices for the path.
+            Example:  "13 A B D"
+            </param>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.PathFactories.PathFactory`4">
+            <summary>
+            Used for creating an instance of Path{E, V, W}.
+            Example of path types which can be created by an implementation class:
+                Path{Edge, Vertex, Weight} (and note that all these types are part of the library)
+                Path{Road, City, WeightDeterminedByRoadLengthAndQuality}
+                    (and note that the above three types within brackets are NOT part of the library but 
+                     examples of types which client code can create as subtypes)
+            </summary>
+            <typeparam name="P">Path or subtype</typeparam>
+            <typeparam name="E">Edge or subtype</typeparam>
+            <typeparam name="V">Vertex or subtype</typeparam>
+            <typeparam name="W">Weight or subtype</typeparam>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Validation.GraphEdgesValidationDesired">
+            <summary>
+            Currently only two possbile values (but this might of course become extended with mroe fine-grained options about what to validate).
+            The reason for using this enum (instead of boolean) is to provide semantic when reading code with the invocation
+            instead of just sending some value of "true" or "false" 
+            </summary>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Validation.GraphEdgesValidator`4.ValidateNonBlankIds(`1)">
+            <summary>
+            Precondition: the "outer" objects (e.g. "edge" and "edge.getStartVertex()" should already have been checked for not being null. 
+            </summary>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Validation.GraphEdgesValidator`4.ValidateUniqueVerticesIds(`1,System.Collections.Generic.IDictionary{System.String,System.Boolean})">
+            <summary>
+            Precondition: the edge should already have been checked for nulls and blank values, i.e. 
+            the method can assume that 'edge.StartVertex.VertexId' will work without throwing Exception.
+            </summary>
+            <param name="edge"></param>
+            <param name="mapForValidatingUniqueVerticesIds"></param>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Validation.GraphEdgesValidator`4.ValidateAllPathsOnlyContainEdgesDefinedInGraph(System.Collections.Generic.IList{`0},System.Collections.Generic.IList{`1})">
+            <summary>
+            An example of usage for this method is that both parameters (expected list of paths, and a list of edges) 
+            may be defined in an xml file, but they might be defined incorrectly, and then it is desirable
+            to fail early to easier realize that the problem is how the test is defined rather than the behaviour 
+            of the code under test.
+            Precondition: The list of all the edges should be valid, i.e. it is NOT tested again in this method that
+            the vertices and weights are not null.    
+            </summary>
+            <param name="paths">list of paths</param>
+            <param name="allEdgesForGraph">all edges for the graph</param>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Validation.GraphEdgesValidator`4.CreateMapWithAllEdgesInGraph(System.Collections.Generic.IList{`1})">
+            <returns>a map with edges as values, and the key is a string created with a private helper method in this same class</returns>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Validation.GraphEdgesValidator`4.CreateMapKeyUsedInMapWithEdges(`1)">
+            <summary>
+            Precondition: the input edge and all its aggregated parts must be non-null, i.e. this method should 
+            never throw an NullPointerException if the precondition is respected.
+            </summary>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Core.Validation.GraphEdgesValidator`4.ValidateEdgesForGraphCreation``4(System.Collections.Generic.IList{``1})">
+            <typeparam name="P">Path</typeparam>
+            <typeparam name="E">Edge</typeparam>
+            <typeparam name="V">Vertex</typeparam>
+            <typeparam name="W">Weight</typeparam>
+            <param name="edges">list of edges</param>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Core.Validation.GraphValidationException">
+            <summary>
+            See <see cref="!:GraphEdgesValidator"/>
+            </summary>
+        </member>
+        <member name="T:Programmerare.ShortestPaths.Utils.MapperForIntegerIdsAndGeneralStringIds">
+            <summary>
+            The purpose of this class is to provide mapping between strings and integer ids
+            for those kind of implementations which requires integers as ids.
+            For example if you want to provide data to an implementation you may want to specify the 
+            two vertices and the weight for the edge between them like below:
+                A B 12.4
+                B C 13.7
+                A C 11.9
+            However, some implementations (e.g. the current implementation of https://github.com/yan-qi/k-shortest-paths-java-version
+            require that the vertices are specified with integers like this:
+                0 1 12.4
+                1 2 13.7
+                0 2 11.9 
+            To be able to use such an implementation, this mapper class was created.
+            </summary>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Utils.MapperForIntegerIdsAndGeneralStringIds.CreateIdMapper(System.Int32)">
+            <param name="integerIdForFirstVertex">probably either zero or one</param>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Utils.StringUtility.GetDoubleAsStringWithoutZeroesAndDotIfNotRelevant(System.String)">
+            <summary>
+            Used for testing since the input can then be controlled better with the current implementation.
+            For example, if you want to assert that 13.0010 (double value) becomes "13.001" then 
+            you can test with "13.0010" (string) as input, since you otherwise may be incorrectly 
+            believe that you tested strign behaviour while it was Double.toString which eliminated a zero.
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Programmerare.ShortestPaths.Utils.TimeMeasurer.GetNumberOfSecondsBetweenTwoDates(System.DateTime,System.DateTime)">
+            <summary>
+            The number of seconds between the two DateTime instances.
+            The returned value is an integer and is rounded by removing the decimal 
+            part as when using casting from double to int.
+            https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/explicit-numeric-conversions-table
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
