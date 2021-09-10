@@ -193,10 +193,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-<<<<<<< HEAD
     <Compile Include="Business Logic\HandleRoutes.cs" />
-=======
->>>>>>> fad2a3c8f1868aa814742bea9d7ba3ceb44b0ff1
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -209,10 +206,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-<<<<<<< HEAD
     <Compile Include="Interfaces\IHandleRoutes.cs" />
-=======
->>>>>>> fad2a3c8f1868aa814742bea9d7ba3ceb44b0ff1
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Dimensions.cs" />
     <Compile Include="Models\IdentityModels.cs" />
