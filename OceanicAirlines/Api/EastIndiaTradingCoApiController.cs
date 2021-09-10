@@ -12,19 +12,22 @@ namespace OceanicAirlines.Api
     public class EastIndiaTradingCoApiController : ApiController
     {
 
-        static string _address = "http://wa-eit-dk1.azurewebsites.net/api/EITCAPI/getConnection";
+        static string _address = "http://wa-ei-dk1.azurewebsites.net/api/GetRouteDetails";
 
-        public IHttpActionResult Post(RouteSearchDTO search)
+        public async void Post(RouteSearchDTO search)
         {
-            //search = new RouteSearchDTO {Depth = 1.1f };
-            var result = GetExternalResponse(search);
-            return Json(result);
+            var result = await GetExternalResponse(search);
         }
 
-        public RouteDetailsDTO GetExternalResponse (RouteSearchDTO search)
+        private async Task<string> GetExternalResponse(RouteSearchDTO search)
         {
-            var apiAcces = new AccesExternalApi();
-            return apiAcces.GetExternalResponse(_address, search); 
+            var client = new HttpClient();
+            var payload = JsonConvert.SerializeObject(search);
+            var content = new StringContent(payload, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync(_address, content);
+            response.EnsureSuccessStatusCode();
+            var result = await response.Content.ReadAsStringAsync();
+            return result;
         }
     }
 }

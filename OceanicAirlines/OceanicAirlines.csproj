@@ -183,7 +183,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\AccesExternalApi.cs" />
     <Compile Include="Api\EastIndiaTradingCoApiController.cs" />
     <Compile Include="Api\OceanicAirlinesApiController.cs" />
     <Compile Include="Api\TelstarLogisticsApiController.cs" />
@@ -194,12 +193,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+<<<<<<< HEAD
     <Compile Include="Business Logic\HandleRoutes.cs" />
+=======
+>>>>>>> fad2a3c8f1868aa814742bea9d7ba3ceb44b0ff1
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
-    <Compile Include="Controllers\SearchRouteController.cs" />
     <Compile Include="DataAccessLayer\OceanicAirlinesInitializer.cs" />
     <Compile Include="DataAccessLayer\OceanicAirlinesContext.cs" />
     <Compile Include="DTO\RouteDetailsDTO.cs" />
@@ -208,7 +209,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+<<<<<<< HEAD
     <Compile Include="Interfaces\IHandleRoutes.cs" />
+=======
+>>>>>>> fad2a3c8f1868aa814742bea9d7ba3ceb44b0ff1
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Dimensions.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -253,7 +257,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <None Include="Views\SearchRoute\SearchRoute.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

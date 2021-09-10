@@ -12,19 +12,22 @@ namespace OceanicAirlines.Api
     public class TelstarLogisticsApiController : ApiController
     {
 
-        static string _address = "http://wa-tl-dk1.azurewebsites.net//delivery/getRouteDetails";
-
-        public IHttpActionResult Post(RouteSearchDTO search)
+        static string _address = "http://wa-tl-dk1.azurewebsites.net/api/GetRouteDetails";
+        //static string _address = "https://localhost:44375//api/GetRouteDetails";
+        
+        public async void Post(RouteSearchDTO search)
         {
-            //search = new RouteSearchDTO {Origin = "Hvalbugten", Destination = "Kapstaden", ParcelType = 6, Depth = 1.1f, Height = 1.1f, Width = 1.1f, Weight = 2, Month = 6};
-            var result = GetExternalResponse(search);
-            return Json(result);
+            var result = await GetExternalResponse(search);
         }
 
-        public RouteDetailsDTO GetExternalResponse(RouteSearchDTO search)
+        private async Task<string> GetExternalResponse(RouteSearchDTO search)
         {
-            var apiAcces = new AccesExternalApi();
-            return apiAcces.GetExternalResponse(_address, search);
+            var client = new HttpClient();
+            string json = await Task.Run(() => JsonConvert.SerializeObject(search));
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync(_address, null);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return responseContent;
         }
     }
 }
