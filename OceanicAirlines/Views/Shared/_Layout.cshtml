@@ -27,10 +27,13 @@
                         <li>@Html.ActionLink("Route", "Index", "Route")</li>
                     </ul>
                 }
-                    @Html.Partial("_LoginPartial")         
-                <a href="@Url.Action("Index", "Home", null)">
-                    <img src="~/Content/Images/large-logo.png" style="vertical-align: middle; text-align:right; width: 100px; margin: 10px 10px; ">
-                <a />
+                @Html.Partial("_LoginPartial")
+                <div style="text-align: right">
+                    <a href="@Url.Action("Index", "Home", null)">
+                        <img src="~/Content/Images/large-logo.png" style="vertical-align: middle; text-align:right; width: 100px; margin: 10px 10px; ">
+                        <a />
+                </div>
+
             </div>
         </div>
     </div>
@@ -38,7 +41,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p style="text-align:left">&copy; @DateTime.Now.Year   -   Oceanic Airlines   -   55 43 22 33   -   contact@oceanicairlines.com </p>
+            <p style="text-align:center">&copy; @DateTime.Now.Year   -   Oceanic Airlines   -   55 43 22 33   -   contact@oceanicairlines.com </p>
         </footer>
     </div>
 
