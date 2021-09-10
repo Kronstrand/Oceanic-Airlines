@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Search For Route";
+}
+@Styles.Render("~/Content/css/SearchRoute.css")
+<div class="col-lg-12">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-6 search-box-form">
+        <form>
+            <div class="col-lg-6">
+                <label id="OriginCityLabel">From</label>
+            </div>
+            <div class="col-lg-6">
+                <label id="DestinationCityLabel">To</label>
+            </div>
+            <br />
+
+            <div class="col-lg-4" id="bloodhound">
+                <input class="typeahead" id="OriginCity" name="OriginCity" type="text" placeholder="Search...">
+            </div>
+            <div class="col-lg-6" id="bloodhound2">
+                <input class="typeahead" id="DestinationCity" name="DestinationCity" type="text" placeholder="Search...">
+            </div>
+            <br />
+            <br />
+            <br />
+            <label id="WeightLabel">Weight</label>
+            <br />
+            <input type="text" id="Weight" name="Weight" value="" />
+            <br />
+            <br />
+            <label id="WeightLabel">Discount</label>
+            <br />
+            <input type="number" id="Discount" name="Discount" value="" />
+            <br />
+            <button type="submit" class="btn submit-button">SEARCH</button>
+        </form>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+<h3>@ViewBag.Message</h3>
+
+
+<p>Use this area to provide additional information.</p>
+<h3>@ViewBag.FinalResults</h3>

@@ -9,11 +9,11 @@ namespace OceanicAirlines.DTO
     {
         public string Origin { get; set; }
         public string Destination { get; set; }
-        public double Weight { get; set; }
+        public float Weight { get; set; }
         public int Month { get; set; }
         public int ParcelType { get; set; }
-        public int Height { get; set; }
-        public int Depth { get; set; }
-        public int Width { get; set; }
+        public float Height { get; set; }
+        public float Depth { get; set; }
+        public float Width { get; set; }
     }
 }
